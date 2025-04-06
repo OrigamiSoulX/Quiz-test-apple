@@ -1,0 +1,5 @@
+[33mcommit 96b8470e998ad9e827cebadde838168ccde96601[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m
+Author: Pierluigi Loffredo <origamisoulx@gmail.com>
+Date:   Sun Apr 6 19:38:23 2025 +0200
+
+    Fix: Migliorata la randomizzazione delle risposte con doppia randomizzazione

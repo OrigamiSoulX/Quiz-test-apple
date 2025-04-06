@@ -113,4 +113,6 @@ Questo progetto è sotto la licenza MIT - vedi il file [LICENSE](LICENSE) per i 
 - GitHub: [@OrigamiSoulX](https://github.com/OrigamiSoulX)
 
 ## 🙏 Ringraziamenti
+
+- Suoni di feedback da [freesound.org](https://freesound.org)
 - Ispirazione dal design di [Apple Human Interface Guidelines](https://developer.apple.com/design/human-interface-guidelines/) 

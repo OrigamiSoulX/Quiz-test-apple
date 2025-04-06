@@ -6,194 +6,266 @@ const quizData = {
             {
                 question: "What is encapsulation in OOP?",
                 options: [
-                    "Bundling data and methods that operate on that data",
                     "Creating multiple instances of a class",
+                    "Bundling data and methods that operate on that data",
                     "Inheriting properties from a parent class",
                     "Overriding methods in a subclass"
                 ],
-                correct: 0,
+                correct: 1,
                 explanation: "Encapsulation is the bundling of data and methods that operate on that data into a single unit, typically a class."
             },
             {
                 question: "What is inheritance in OOP?",
                 options: [
-                    "A mechanism to create new classes from existing ones",
                     "A way to hide implementation details",
                     "A method to create multiple instances",
+                    "A mechanism to create new classes from existing ones",
                     "A technique to override methods"
                 ],
-                correct: 0,
+                correct: 2,
                 explanation: "Inheritance allows a class to inherit properties and methods from another class, promoting code reuse."
             },
             {
                 question: "What is polymorphism in OOP?",
                 options: [
-                    "The ability to take many forms",
                     "The process of hiding data",
                     "The creation of multiple instances",
-                    "The bundling of data and methods"
+                    "The bundling of data and methods",
+                    "The ability to take many forms"
                 ],
-                correct: 0,
+                correct: 3,
                 explanation: "Polymorphism allows objects of different classes to be treated as objects of a common superclass."
             },
             {
                 question: "What is abstraction in OOP?",
                 options: [
-                    "Hiding complex implementation details",
                     "Creating multiple instances",
+                    "Hiding complex implementation details",
                     "Inheriting properties",
                     "Overriding methods"
                 ],
-                correct: 0,
+                correct: 1,
                 explanation: "Abstraction focuses on hiding complex implementation details and showing only the essential features."
             },
             {
                 question: "What is a class in OOP?",
                 options: [
-                    "A blueprint for creating objects",
                     "A method to hide data",
                     "A way to create instances",
+                    "A blueprint for creating objects",
                     "A technique to override methods"
                 ],
-                correct: 0,
+                correct: 2,
                 explanation: "A class is a blueprint or template for creating objects, defining their properties and behaviors."
             },
             {
                 question: "What is an object in OOP?",
                 options: [
-                    "An instance of a class",
                     "A method to hide data",
+                    "An instance of a class",
                     "A way to create classes",
                     "A technique to override methods"
                 ],
-                correct: 0,
+                correct: 1,
                 explanation: "An object is an instance of a class, created from the class blueprint."
             },
             {
                 question: "What is a method in OOP?",
                 options: [
-                    "A function defined within a class",
                     "A way to hide data",
                     "A technique to create instances",
-                    "A process to override methods"
+                    "A process to override methods",
+                    "A function defined within a class"
                 ],
-                correct: 0,
+                correct: 3,
                 explanation: "A method is a function defined within a class that operates on the class's data."
             },
             {
                 question: "What is a constructor in OOP?",
                 options: [
-                    "A special method to initialize objects",
                     "A way to hide data",
+                    "A special method to initialize objects",
                     "A technique to create classes",
                     "A process to override methods"
                 ],
-                correct: 0,
+                correct: 1,
                 explanation: "A constructor is a special method used to initialize objects when they are created."
             },
             {
                 question: "What is method overriding in OOP?",
                 options: [
-                    "Providing a new implementation of a method in a subclass",
                     "Hiding data in a class",
                     "Creating multiple instances",
+                    "Providing a new implementation of a method in a subclass",
                     "Bundling data and methods"
                 ],
-                correct: 0,
+                correct: 2,
                 explanation: "Method overriding allows a subclass to provide a specific implementation of a method that is already defined in its parent class."
             },
             {
                 question: "What is method overloading in OOP?",
                 options: [
-                    "Creating multiple methods with the same name but different parameters",
                     "Hiding data in a class",
+                    "Creating multiple methods with the same name but different parameters",
                     "Creating multiple instances",
                     "Bundling data and methods"
                 ],
-                correct: 0,
+                correct: 1,
                 explanation: "Method overloading allows multiple methods to have the same name but different parameters."
             }
         ]
     },
-    algebra: {
-        title: "Algebra and Mathematical Logic Quiz",
+    logic: {
+        title: "Logic Test Smart Mind",
         questions: [
             {
-                question: "What is the next number in the sequence: 2, 4, 8, 16, ...?",
+                question: "Osserva la sequenza di figure e indica quale sarà la prossima:",
+                drawFunction: () => {
+                    const sequence = [
+                        { type: 'square', points: 1 },
+                        { type: 'square', points: 2 },
+                        { type: 'square', points: 4 },
+                        { type: 'square', points: 7 }
+                    ];
+                    animateSequence(sequence);
+                },
                 options: [
-                    "32",
-                    "24",
-                    "20",
-                    "28"
+                    "13 punti",
+                    "15 punti",
+                    "16 punti",
+                    "18 punti"
                 ],
-                correct: 0,
-                explanation: "Each number is multiplied by 2 to get the next number in the sequence."
+                correct: 2,
+                explanation: "La differenza tra numeri consecutivi aumenta di 1 ogni volta: +1, +2, +3, +4, quindi il prossimo sarà +5, cioè 11+5=16."
             },
             {
-                question: "What is the probability of rolling a 6 on a standard die?",
+                question: "Osserva la rotazione delle figure e indica la posizione finale:",
+                drawFunction: (ctx) => {
+                    // Disegna un cerchio e un triangolo con rotazioni
+                    const centerX = 150;
+                    const centerY = 150;
+                    
+                    // Disegna il cerchio iniziale
+                    drawCircle(ctx, centerX, centerY, 30);
+                    
+                    // Disegna il triangolo iniziale
+                    drawTriangle(ctx, centerX + 100, centerY, 30);
+                    
+                    // Disegna le frecce di rotazione
+                    ctx.beginPath();
+                    ctx.moveTo(centerX + 40, centerY);
+                    ctx.lineTo(centerX + 60, centerY);
+                    ctx.stroke();
+                    
+                    ctx.beginPath();
+                    ctx.moveTo(centerX + 140, centerY);
+                    ctx.lineTo(centerX + 160, centerY);
+                    ctx.stroke();
+                },
                 options: [
-                    "1/6",
-                    "1/3",
-                    "1/2",
-                    "1/4"
+                    "180 gradi",
+                    "270 gradi",
+                    "300 gradi",
+                    "360 gradi"
                 ],
-                correct: 0,
-                explanation: "A standard die has 6 faces, so the probability of rolling any specific number is 1 out of 6."
+                correct: 1,
+                explanation: "Il cerchio ruota di 180° (45° × 4) in senso orario, il triangolo di 120° (30° × 4) in senso antiorario. La differenza totale è 180° + 120° = 300°."
             },
             {
-                question: "Complete the sequence: A, C, E, G, ...",
+                question: "Completa la sequenza di figure geometriche:",
+                drawFunction: () => {
+                    const sequence = ['triangle', 'square', 'pentagon', 'hexagon'];
+                    animateGeometricSequence(sequence);
+                },
                 options: [
-                    "I",
-                    "H",
-                    "F",
-                    "J"
+                    "Triangolo",
+                    "Quadrato",
+                    "Pentagono",
+                    "Esagono"
                 ],
-                correct: 0,
-                explanation: "The sequence follows the pattern of skipping one letter in the alphabet (A, skip B, C, skip D, etc.)."
+                correct: 2,
+                explanation: "La sequenza si ripete ogni 4 figure. 15 diviso 4 dà resto 3, quindi sarà la terza figura della sequenza: Pentagono."
             },
             {
-                question: "What is the next number in the sequence: 1, 1, 2, 3, 5, 8, ...?",
+                question: "In una griglia di simboli, ogni riga contiene 4 simboli tra stelle, lune e soli. Se in ogni riga la somma di stelle e lune deve essere pari e ci devono essere almeno 2 soli, quante combinazioni diverse sono possibili?",
+                drawFunction: () => {
+                    const symbols = ['star', 'moon', 'sun', 'star', 'moon', 'sun', 'star', 'moon', 'sun'];
+                    animateGrid(symbols, 3, 3);
+                },
                 options: [
-                    "13",
+                    "6",
+                    "8",
                     "10",
-                    "11",
                     "12"
                 ],
-                correct: 0,
-                explanation: "This is the Fibonacci sequence where each number is the sum of the two preceding ones."
+                correct: 2,
+                explanation: "Considerando le restrizioni (somma pari di stelle e lune, almeno 2 soli), ci sono 10 combinazioni possibili."
             },
             {
-                question: "If it takes 5 machines 5 minutes to make 5 widgets, how long would it take 100 machines to make 100 widgets?",
+                question: "Se in una sequenza ogni figura è composta da un numero di lati pari alla somma dei lati delle due figure precedenti, e le prime due figure sono un triangolo e un quadrato, quanti lati avrà la quinta figura della sequenza?",
                 options: [
-                    "5 minutes",
-                    "100 minutes",
-                    "20 minutes",
-                    "1 minute"
+                    "21",
+                    "24",
+                    "28",
+                    "34"
                 ],
-                correct: 0,
-                explanation: "Each machine takes 5 minutes to make one widget, so 100 machines would take the same 5 minutes to make 100 widgets."
+                correct: 2,
+                explanation: "Triangolo (3), Quadrato (4), 7 lati, 11 lati, 18 lati, 28 lati. È come la sequenza di Fibonacci ma partendo da 3 e 4."
             },
             {
-                question: "How many fingers are there on 10 hands?",
+                question: "In un pattern di figure bianche e nere, ogni figura segue questa regola: se le due figure precedenti sono diverse, la figura è nera; se sono uguali, è bianca. Se la sequenza inizia con Bianca, Nera, quale sarà il colore della ottava figura?",
                 options: [
-                    "50",
-                    "100",
-                    "20",
-                    "10"
+                    "Bianca",
+                    "Nera",
+                    "Non può essere determinato",
+                    "Dipende dalla sesta figura"
                 ],
                 correct: 0,
-                explanation: "Each hand has 5 fingers, so 10 hands would have 50 fingers in total."
+                explanation: "Seguendo la regola: B,N,N,B,N,N,B,B. L'ottava figura sarà Bianca perché le due precedenti sono diverse."
             },
             {
-                question: "What is the next number in the sequence: 1, 4, 9, 16, 25, ...?",
+                question: "In una serie di dadi, ogni dado successivo viene ruotato di 90° verso destra e poi di 90° verso l'alto. Se si parte con il numero 1 in alto, quale numero sarà in alto dopo 5 rotazioni?",
                 options: [
-                    "36",
-                    "30",
-                    "32",
-                    "28"
+                    "3",
+                    "4",
+                    "5",
+                    "6"
                 ],
-                correct: 0,
-                explanation: "This sequence represents perfect squares (1², 2², 3², 4², 5², ...)."
+                correct: 2,
+                explanation: "Seguendo le rotazioni: 1→3→2→4→5. Dopo 5 rotazioni, il numero 5 sarà in alto."
+            },
+            {
+                question: "In una sequenza di figure concentriche (cerchio, triangolo, quadrato), ogni nuova figura alterna tra essere interna o esterna alle precedenti. Se la sequenza inizia con un cerchio, come sarà composta la quarta figura della sequenza?",
+                options: [
+                    "Quadrato esterno al cerchio",
+                    "Triangolo interno al cerchio",
+                    "Cerchio esterno al triangolo",
+                    "Quadrato interno al triangolo"
+                ],
+                correct: 3,
+                explanation: "La sequenza è: cerchio, triangolo interno, quadrato esterno, triangolo interno al quadrato."
+            },
+            {
+                question: "In un orologio logico, le ore si muovono di 3 posizioni in avanti e i minuti di 15 posizioni indietro ad ogni passaggio. Se si parte dalle 3:00, che ora sarà dopo 4 passaggi?",
+                options: [
+                    "7:00",
+                    "11:00",
+                    "2:00",
+                    "5:00"
+                ],
+                correct: 1,
+                explanation: "Le ore: 3→6→9→12→3. I minuti: 00→45→30→15→00. Quindi sarà 11:00."
+            },
+            {
+                question: "In una griglia di simboli, ogni riga contiene 4 simboli tra stelle, lune e soli. Se in ogni riga la somma di stelle e lune deve essere pari e ci devono essere almeno 2 soli, quante combinazioni diverse sono possibili?",
+                options: [
+                    "6",
+                    "8",
+                    "10",
+                    "12"
+                ],
+                correct: 2,
+                explanation: "Considerando le restrizioni (somma pari di stelle e lune, almeno 2 soli), ci sono 10 combinazioni possibili."
             }
         ]
     },
@@ -316,114 +388,598 @@ const quizData = {
         title: "Apple Human Interface Guidelines Quiz",
         questions: [
             {
-                question: "What is the minimum recommended size for a touch target in iOS?",
+                question: "Quale principio di design meglio rappresenta l'approccio di Apple all'interfaccia utente?",
                 options: [
-                    "44x44 points",
-                    "30x30 points",
-                    "20x20 points",
-                    "50x50 points"
+                    "Massima personalizzazione per ogni utente",
+                    "Semplicità e chiarezza prima di tutto",
+                    "Funzionalità avanzate in primo piano",
+                    "Design artistico e creativo"
                 ],
-                correct: 0,
-                explanation: "Apple recommends a minimum size of 44x44 points for touch targets to ensure elements are easily tappable."
+                correct: 1,
+                explanation: "Apple privilegia la semplicità e la chiarezza, rendendo le interfacce intuitive e facili da usare per tutti gli utenti."
             },
             {
-                question: "What is the minimum recommended contrast ratio for text in iOS?",
+                question: "In un'app di fotografia, quale sarebbe il modo migliore per presentare le funzioni di editing?",
                 options: [
-                    "4.5:1",
-                    "3:1",
-                    "2:1",
-                    "5:1"
+                    "Mostrare tutte le opzioni disponibili contemporaneamente",
+                    "Presentare le funzioni più comuni e nascondere quelle avanzate in un menu secondario",
+                    "Nascondere tutte le funzioni in menu a tendina",
+                    "Creare un tutorial obbligatorio per ogni funzione"
                 ],
-                correct: 0,
-                explanation: "Apple recommends a minimum contrast ratio of 4.5:1 between text and background to ensure readability."
+                correct: 1,
+                explanation: "Le HIG suggeriscono di mantenere l'interfaccia semplice mostrando le funzioni più comuni, permettendo agli utenti di accedere a funzionalità avanzate quando necessario."
             },
             {
-                question: "What is the minimum recommended text size for readability?",
+                question: "Come dovrebbe essere gestito il feedback dopo che un utente salva un documento?",
                 options: [
-                    "11 points",
-                    "9 points",
-                    "7 points",
-                    "13 points"
+                    "Mostrare un popup che richiede conferma",
+                    "Non mostrare alcun feedback per non disturbare",
+                    "Fornire un feedback sottile ma chiaro, come un'animazione o un indicatore temporaneo",
+                    "Riprodurre un suono di notifica"
                 ],
-                correct: 0,
-                explanation: "Apple recommends a minimum text size of 11 points to ensure readability across all devices."
+                correct: 2,
+                explanation: "Il feedback dovrebbe essere chiaro ma non invasivo, confermando l'azione senza interrompere il flusso di lavoro dell'utente."
             },
             {
-                question: "What is the minimum recommended margin between interactive elements?",
+                question: "Quale approccio è più appropriato per la gestione degli errori in un form?",
                 options: [
-                    "8 points",
-                    "4 points",
-                    "12 points",
-                    "16 points"
+                    "Mostrare tutti gli errori alla fine della compilazione",
+                    "Evidenziare gli errori in tempo reale mentre l'utente digita",
+                    "Bloccare l'input quando viene rilevato un errore",
+                    "Resettare il form in caso di errori"
                 ],
-                correct: 0,
-                explanation: "Apple recommends a minimum margin of 8 points between interactive elements to prevent accidental taps."
+                correct: 1,
+                explanation: "Il feedback immediato aiuta gli utenti a correggere gli errori mentre compilano il form, migliorando l'esperienza utente."
             },
             {
-                question: "What is the standard color for links in iOS?",
+                question: "In un'app di navigazione, come dovrebbero essere presentate le direzioni?",
                 options: [
-                    "Blue",
-                    "Red",
-                    "Green",
-                    "Black"
+                    "Mostrare tutte le informazioni possibili contemporaneamente",
+                    "Fornire solo le informazioni essenziali per il passo corrente",
+                    "Nascondere le direzioni in un menu",
+                    "Usare solo indicazioni testuali"
                 ],
-                correct: 0,
-                explanation: "The standard color for links in iOS is blue, which is universally recognized as an indicator of interactivity."
+                correct: 1,
+                explanation: "Presentare solo le informazioni rilevanti per il momento riduce il carico cognitivo e aiuta l'utente a concentrarsi sul task corrente."
             },
             {
-                question: "What is the recommended duration for animations in iOS?",
+                question: "Come dovrebbe essere implementato il Dark Mode secondo le HIG?",
                 options: [
-                    "0.3 seconds",
-                    "0.5 seconds",
-                    "0.1 seconds",
-                    "1 second"
+                    "Come una semplice inversione dei colori",
+                    "Come un'esperienza completamente riprogettata",
+                    "Come una modalità che mantiene la gerarchia visiva e la leggibilità",
+                    "Come un'opzione nascosta per utenti avanzati"
                 ],
-                correct: 0,
-                explanation: "Apple recommends a duration of 0.3 seconds for animations, which is long enough to be noticed but not so long that it slows down interaction."
+                correct: 2,
+                explanation: "Il Dark Mode dovrebbe mantenere la gerarchia visiva e la leggibilità, non essere una semplice inversione dei colori."
             },
             {
-                question: "What is the standard corner radius for buttons in iOS?",
+                question: "Quale approccio è migliore per la navigazione in un'app complessa?",
                 options: [
-                    "8 points",
-                    "4 points",
-                    "12 points",
-                    "16 points"
+                    "Utilizzare un menu hamburger per nascondere tutte le opzioni",
+                    "Mostrare una tab bar con le funzioni principali e organizzare logicamente le secondarie",
+                    "Creare un menu a più livelli",
+                    "Utilizzare gesture nascoste"
                 ],
-                correct: 0,
-                explanation: "Apple recommends a corner radius of 8 points for buttons, which provides a modern and consistent look."
+                correct: 1,
+                explanation: "Una tab bar con le funzioni principali offre accesso immediato alle funzionalità più importanti, mantenendo l'app navigabile."
             },
             {
-                question: "What is the minimum recommended thickness for lines in iOS?",
+                question: "Come dovrebbe essere gestito il caricamento dei dati?",
                 options: [
-                    "1 point",
-                    "0.5 points",
-                    "2 points",
-                    "1.5 points"
+                    "Mostrare una schermata di caricamento a tutto schermo",
+                    "Non mostrare indicatori di caricamento",
+                    "Utilizzare indicatori di progresso contestuali e skeleton screens",
+                    "Bloccare l'interfaccia durante il caricamento"
                 ],
-                correct: 0,
-                explanation: "Apple recommends a minimum thickness of 1 point for lines to ensure visibility across all devices."
+                correct: 2,
+                explanation: "Gli indicatori contestuali e le skeleton screens mantengono l'app reattiva e informano l'utente senza bloccare l'interfaccia."
             },
             {
-                question: "What is the minimum recommended size for icons in iOS?",
+                question: "Quale approccio è migliore per presentare le impostazioni dell'app?",
                 options: [
-                    "24x24 points",
-                    "20x20 points",
-                    "16x16 points",
-                    "28x28 points"
+                    "Mostrare tutte le impostazioni in una lunga lista",
+                    "Organizzare le impostazioni in categorie logiche con descrizioni chiare",
+                    "Nascondere le impostazioni avanzate",
+                    "Utilizzare un sistema di ricerca per le impostazioni"
                 ],
-                correct: 0,
-                explanation: "Apple recommends a minimum size of 24x24 points for icons to ensure recognizability."
+                correct: 1,
+                explanation: "Organizzare le impostazioni in categorie logiche aiuta gli utenti a trovare facilmente quello che cercano."
             },
             {
-                question: "What is the minimum recommended padding for text in iOS?",
+                question: "Come dovrebbe essere implementata la funzione di annullamento di un'azione?",
                 options: [
-                    "16 points",
-                    "8 points",
-                    "12 points",
-                    "20 points"
+                    "Chiedere sempre conferma prima di ogni azione",
+                    "Non permettere l'annullamento delle azioni",
+                    "Offrire un modo semplice e immediato per annullare le azioni recenti",
+                    "Nascondere l'opzione di annullamento in un menu"
                 ],
-                correct: 0,
-                explanation: "Apple recommends a minimum padding of 16 points for text to ensure comfortable spacing."
+                correct: 2,
+                explanation: "Permettere l'annullamento immediato dà sicurezza agli utenti e migliora l'esperienza d'uso."
+            },
+            {
+                question: "Quale approccio è migliore per la gestione dei permessi dell'app?",
+                options: [
+                    "Richiedere tutti i permessi all'avvio",
+                    "Richiedere i permessi solo quando necessari, spiegandone il motivo",
+                    "Non richiedere mai permessi",
+                    "Nascondere le richieste di permessi nelle impostazioni"
+                ],
+                correct: 1,
+                explanation: "Richiedere i permessi nel contesto appropriato, spiegando perché sono necessari, aiuta gli utenti a prendere decisioni informate."
+            },
+            {
+                question: "Come dovrebbe essere gestita la personalizzazione dell'interfaccia?",
+                options: [
+                    "Offrire infinite opzioni di personalizzazione",
+                    "Non permettere personalizzazioni",
+                    "Offrire opzioni di personalizzazione mirate che migliorano l'esperienza utente",
+                    "Nascondere le opzioni di personalizzazione"
+                ],
+                correct: 2,
+                explanation: "Le opzioni di personalizzazione dovrebbero essere significative e migliorare l'esperienza senza complicare l'interfaccia."
+            },
+            {
+                question: "Quale approccio è migliore per i tutorial in-app?",
+                options: [
+                    "Tutorial obbligatori e dettagliati",
+                    "Nessun tutorial",
+                    "Tutorial contestuali e opzionali che guidano l'utente quando necessario",
+                    "Video tutorial all'avvio"
+                ],
+                correct: 2,
+                explanation: "I tutorial contestuali permettono agli utenti di imparare mentre usano l'app, senza interrompere il loro flusso di lavoro."
+            },
+            {
+                question: "Come dovrebbe essere implementata la ricerca in un'app con molti contenuti?",
+                options: [
+                    "Un semplice campo di ricerca testuale",
+                    "Una ricerca avanzata con molti filtri",
+                    "Una ricerca intelligente con filtri contestuali e suggerimenti",
+                    "Nessuna funzione di ricerca"
+                ],
+                correct: 2,
+                explanation: "Una ricerca intelligente con suggerimenti aiuta gli utenti a trovare rapidamente ciò che cercano."
+            },
+            {
+                question: "Quale approccio è migliore per la gestione degli aggiornamenti dell'app?",
+                options: [
+                    "Aggiornamenti forzati immediati",
+                    "Nessuna notifica di aggiornamento",
+                    "Notifiche non intrusive con la possibilità di rimandare",
+                    "Aggiornamenti automatici nascosti"
+                ],
+                correct: 2,
+                explanation: "Gli aggiornamenti dovrebbero essere comunicati in modo non intrusivo, dando agli utenti il controllo su quando installarli."
+            },
+            {
+                question: "Come dovrebbe essere gestita la condivisione dei contenuti?",
+                options: [
+                    "Offrire tutte le possibili opzioni di condivisione",
+                    "Limitare la condivisione a poche opzioni",
+                    "Mostrare le opzioni più rilevanti per il contenuto e il contesto",
+                    "Nascondere le opzioni di condivisione in un menu"
+                ],
+                correct: 2,
+                explanation: "Le opzioni di condivisione dovrebbero essere contestuali e rilevanti per il tipo di contenuto."
+            },
+            {
+                question: "Quale approccio è migliore per il feedback aptico?",
+                options: [
+                    "Usare il feedback aptico per ogni interazione",
+                    "Non usare mai il feedback aptico",
+                    "Usare il feedback aptico in modo mirato per azioni significative",
+                    "Lasciare che l'utente configuri ogni feedback"
+                ],
+                correct: 2,
+                explanation: "Il feedback aptico dovrebbe essere usato in modo significativo per rafforzare azioni importanti."
+            },
+            {
+                question: "Come dovrebbe essere gestita la privacy dei dati utente?",
+                options: [
+                    "Raccogliere tutti i dati possibili",
+                    "Non raccogliere alcun dato",
+                    "Raccogliere solo i dati necessari e comunicarlo chiaramente",
+                    "Nascondere la raccolta dati"
+                ],
+                correct: 2,
+                explanation: "La trasparenza nella raccolta dati costruisce fiducia e rispetta la privacy degli utenti."
+            },
+            {
+                question: "Quale approccio è migliore per la gestione delle notifiche?",
+                options: [
+                    "Inviare notifiche frequenti per ogni evento",
+                    "Non inviare mai notifiche",
+                    "Inviare notifiche rilevanti e personalizzabili",
+                    "Lasciare tutte le notifiche nelle impostazioni"
+                ],
+                correct: 2,
+                explanation: "Le notifiche dovrebbero essere rilevanti e permettere agli utenti di controllarle."
+            },
+            {
+                question: "Come dovrebbe essere implementato il multitasking?",
+                options: [
+                    "Permettere sempre tutte le operazioni contemporaneamente",
+                    "Non supportare il multitasking",
+                    "Supportare il multitasking in modo contestuale e intuitivo",
+                    "Nascondere le funzionalità di multitasking"
+                ],
+                correct: 2,
+                explanation: "Il multitasking dovrebbe essere supportato quando ha senso per l'utente e l'app."
+            },
+            {
+                question: "Quale approccio è migliore per la gestione degli errori di rete?",
+                options: [
+                    "Mostrare un errore tecnico dettagliato",
+                    "Non mostrare alcun errore",
+                    "Mostrare un messaggio chiaro con possibili soluzioni",
+                    "Chiudere l'app in caso di errore"
+                ],
+                correct: 2,
+                explanation: "Gli errori dovrebbero essere comunicati in modo comprensibile e offrire soluzioni quando possibile."
+            },
+            {
+                question: "Come dovrebbe essere implementata la modalità offline?",
+                options: [
+                    "Non supportare l'uso offline",
+                    "Bloccare tutte le funzionalità offline",
+                    "Offrire funzionalità chiave offline con sincronizzazione intelligente",
+                    "Nascondere le funzionalità offline"
+                ],
+                correct: 2,
+                explanation: "La modalità offline dovrebbe mantenere le funzionalità essenziali e sincronizzare quando possibile."
+            },
+            {
+                question: "Quale approccio è migliore per i form lunghi?",
+                options: [
+                    "Mostrare tutti i campi in una singola schermata",
+                    "Dividere il form in step logici con indicatori di progresso",
+                    "Nascondere i campi opzionali",
+                    "Utilizzare solo campi obbligatori"
+                ],
+                correct: 1,
+                explanation: "Dividere i form lunghi in step logici riduce il carico cognitivo e migliora il completamento."
+            },
+            {
+                question: "Come dovrebbe essere gestita l'accessibilità per gli utenti con disabilità visive?",
+                options: [
+                    "Offrire un'app separata per l'accessibilità",
+                    "Ignorare l'accessibilità",
+                    "Integrare l'accessibilità in modo nativo con supporto per screen reader",
+                    "Limitare le funzionalità per semplificare l'accesso"
+                ],
+                correct: 2,
+                explanation: "L'accessibilità dovrebbe essere integrata nativamente nell'app per garantire un'esperienza inclusiva."
+            },
+            {
+                question: "Quale approccio è migliore per la gestione del testo in diverse lingue?",
+                options: [
+                    "Supportare solo la lingua principale",
+                    "Tradurre automaticamente tutto",
+                    "Supportare più lingue con localizzazione appropriata",
+                    "Usare icone invece del testo"
+                ],
+                correct: 2,
+                explanation: "La localizzazione dovrebbe rispettare le convenzioni linguistiche e culturali di ogni lingua."
+            },
+            {
+                question: "Come dovrebbe essere implementato il supporto per schermi di diverse dimensioni?",
+                options: [
+                    "Creare layout fissi",
+                    "Ignorare alcuni dispositivi",
+                    "Utilizzare layout adattivi e responsive",
+                    "Creare app separate per ogni dimensione"
+                ],
+                correct: 2,
+                explanation: "I layout adattivi garantiscono una buona esperienza su tutti i dispositivi."
+            },
+            {
+                question: "Quale approccio è migliore per la gestione dei dati sensibili?",
+                options: [
+                    "Salvare tutto localmente",
+                    "Salvare tutto nel cloud",
+                    "Utilizzare un approccio ibrido con crittografia appropriata",
+                    "Non salvare dati sensibili"
+                ],
+                correct: 2,
+                explanation: "La sicurezza dei dati dovrebbe bilanciare comodità e protezione."
+            },
+            {
+                question: "Come dovrebbe essere implementata la ricerca vocale?",
+                options: [
+                    "Come unica opzione di input",
+                    "Non implementarla",
+                    "Come opzione complementare con feedback chiaro",
+                    "Come funzione nascosta"
+                ],
+                correct: 2,
+                explanation: "La ricerca vocale dovrebbe essere un'opzione aggiuntiva con feedback chiaro sull'interpretazione."
+            },
+            {
+                question: "Quale approccio è migliore per la gestione delle gesture?",
+                options: [
+                    "Usare gesture complesse per tutte le azioni",
+                    "Non usare gesture",
+                    "Usare gesture standard e intuitive con alternative visibili",
+                    "Nascondere le funzionalità dietro gesture"
+                ],
+                correct: 2,
+                explanation: "Le gesture dovrebbero essere intuitive e avere alternative visibili per la scoperta."
+            },
+            {
+                question: "Come dovrebbe essere implementato il feedback sonoro?",
+                options: [
+                    "Usare suoni per ogni interazione",
+                    "Non usare suoni",
+                    "Usare suoni in modo mirato e rispettoso del contesto",
+                    "Lasciare i suoni nelle impostazioni"
+                ],
+                correct: 2,
+                explanation: "Il feedback sonoro dovrebbe essere contestuale e rispettare le preferenze di sistema."
+            },
+            {
+                question: "Quale approccio è migliore per la visualizzazione di dati complessi?",
+                options: [
+                    "Mostrare tutti i dati in tabelle",
+                    "Semplificare eccessivamente i dati",
+                    "Utilizzare visualizzazioni appropriate con livelli di dettaglio",
+                    "Nascondere i dati complessi"
+                ],
+                correct: 2,
+                explanation: "Le visualizzazioni dovrebbero rendere i dati comprensibili mantenendo la complessità necessaria."
+            },
+            {
+                question: "Come dovrebbe essere gestita la performance dell'app?",
+                options: [
+                    "Ottimizzare solo per dispositivi high-end",
+                    "Ignorare la performance",
+                    "Bilanciare performance e funzionalità per tutti i dispositivi",
+                    "Limitare le funzionalità per la performance"
+                ],
+                correct: 2,
+                explanation: "La performance dovrebbe essere ottimizzata per offrire una buona esperienza su tutti i dispositivi."
+            },
+            {
+                question: "Quale approccio è migliore per l'onboarding degli utenti?",
+                options: [
+                    "Tutorial lungo e dettagliato",
+                    "Nessun onboarding",
+                    "Onboarding progressivo e contestuale",
+                    "Video introduttivo obbligatorio"
+                ],
+                correct: 2,
+                explanation: "L'onboarding dovrebbe guidare gli utenti progressivamente attraverso le funzionalità chiave."
+            },
+            {
+                question: "Come dovrebbe essere implementata la ricerca avanzata?",
+                options: [
+                    "Mostrare tutti i filtri possibili",
+                    "Non offrire filtri",
+                    "Offrire filtri contestuali e rilevanti",
+                    "Nascondere i filtri avanzati"
+                ],
+                correct: 2,
+                explanation: "I filtri di ricerca dovrebbero essere pertinenti e facili da usare."
+            },
+            {
+                question: "Quale approccio è migliore per la gestione degli allegati?",
+                options: [
+                    "Permettere qualsiasi tipo di file",
+                    "Non permettere allegati",
+                    "Supportare formati comuni con limiti chiari",
+                    "Limitare a un solo tipo di file"
+                ],
+                correct: 2,
+                explanation: "La gestione degli allegati dovrebbe essere chiara e supportare i formati più comuni."
+            },
+            {
+                question: "Come dovrebbe essere implementato il supporto per Apple Pencil?",
+                options: [
+                    "Come unica opzione di input",
+                    "Non implementarlo",
+                    "Come opzione complementare con funzionalità dedicate",
+                    "Come funzione nascosta"
+                ],
+                correct: 2,
+                explanation: "Il supporto per Apple Pencil dovrebbe aggiungere valore quando appropriato."
+            },
+            {
+                question: "Quale approccio è migliore per la gestione della batteria?",
+                options: [
+                    "Ignorare il consumo della batteria",
+                    "Limitare tutte le funzionalità",
+                    "Ottimizzare il consumo con modalità di risparmio",
+                    "Disabilitare funzioni in background"
+                ],
+                correct: 2,
+                explanation: "L'ottimizzazione della batteria dovrebbe bilanciare funzionalità e durata."
+            },
+            {
+                question: "Come dovrebbe essere implementata la sincronizzazione dei dati?",
+                options: [
+                    "Sincronizzare continuamente tutto",
+                    "Non sincronizzare",
+                    "Sincronizzare in modo intelligente e configurabile",
+                    "Sincronizzare solo manualmente"
+                ],
+                correct: 2,
+                explanation: "La sincronizzazione dovrebbe essere efficiente e rispettare le preferenze dell'utente."
+            },
+            {
+                question: "Quale approccio è migliore per la gestione dei temi?",
+                options: [
+                    "Un solo tema fisso",
+                    "Infinite opzioni di personalizzazione",
+                    "Temi ben progettati che rispettano le linee guida",
+                    "Temi generati automaticamente"
+                ],
+                correct: 2,
+                explanation: "I temi dovrebbero mantenere coerenza e usabilità seguendo le linee guida."
+            },
+            {
+                question: "Come dovrebbe essere implementato il supporto per widget?",
+                options: [
+                    "Widget con tutte le funzionalità dell'app",
+                    "Nessun widget",
+                    "Widget focalizzati su informazioni e azioni chiave",
+                    "Widget puramente decorativi"
+                ],
+                correct: 2,
+                explanation: "I widget dovrebbero fornire informazioni utili e azioni rapide pertinenti."
+            },
+            {
+                question: "Quale approccio è migliore per la gestione degli errori di input?",
+                options: [
+                    "Bloccare l'input non valido",
+                    "Accettare qualsiasi input",
+                    "Validare e guidare verso input corretti",
+                    "Ignorare gli errori"
+                ],
+                correct: 2,
+                explanation: "La validazione dovrebbe aiutare gli utenti a inserire dati corretti."
+            },
+            {
+                question: "Come dovrebbe essere implementata la modalità landscape?",
+                options: [
+                    "Forzare l'orientamento portrait",
+                    "Ignorare l'orientamento landscape",
+                    "Adattare il layout in modo appropriato",
+                    "Creare un'interfaccia separata"
+                ],
+                correct: 2,
+                explanation: "Il supporto landscape dovrebbe offrire un'esperienza ottimizzata quando appropriato."
+            },
+            {
+                question: "Quale approccio è migliore per la gestione dei permessi della fotocamera?",
+                options: [
+                    "Richiedere accesso all'avvio",
+                    "Non usare la fotocamera",
+                    "Richiedere accesso quando necessario con spiegazione",
+                    "Nascondere le funzioni della fotocamera"
+                ],
+                correct: 2,
+                explanation: "I permessi della fotocamera dovrebbero essere richiesti nel contesto appropriato."
+            },
+            {
+                question: "Come dovrebbe essere implementato il supporto per le scorciatoie da tastiera?",
+                options: [
+                    "Nessuna scorciatoia",
+                    "Scorciatoie per tutto",
+                    "Scorciatoie intuitive per azioni comuni",
+                    "Scorciatoie personalizzabili"
+                ],
+                correct: 2,
+                explanation: "Le scorciatoie dovrebbero migliorare l'efficienza per gli utenti della tastiera."
+            },
+            {
+                question: "Quale approccio è migliore per la gestione del testo lungo?",
+                options: [
+                    "Mostrare tutto il testo",
+                    "Troncare sempre il testo",
+                    "Utilizzare tecniche appropriate di presentazione",
+                    "Nascondere il testo lungo"
+                ],
+                correct: 2,
+                explanation: "Il testo lungo dovrebbe essere presentato in modo leggibile e accessibile."
+            },
+            {
+                question: "Come dovrebbe essere implementata la ricerca in-app?",
+                options: [
+                    "Solo ricerca globale",
+                    "Nessuna ricerca",
+                    "Ricerca contestuale con filtri appropriati",
+                    "Ricerca solo per tag"
+                ],
+                correct: 2,
+                explanation: "La ricerca dovrebbe essere contestuale e aiutare gli utenti a trovare ciò che cercano."
+            },
+            {
+                question: "Quale approccio è migliore per la gestione delle animazioni?",
+                options: [
+                    "Animazioni elaborate ovunque",
+                    "Nessuna animazione",
+                    "Animazioni sottili e funzionali",
+                    "Animazioni casuali"
+                ],
+                correct: 2,
+                explanation: "Le animazioni dovrebbero migliorare la comprensione e il feedback."
+            },
+            {
+                question: "Come dovrebbe essere implementato il supporto per il drag and drop?",
+                options: [
+                    "Per ogni elemento",
+                    "Mai",
+                    "Quando migliora l'interazione",
+                    "Solo tra app"
+                ],
+                correct: 2,
+                explanation: "Il drag and drop dovrebbe essere implementato dove ha senso per l'utente."
+            },
+            {
+                question: "Quale approccio è migliore per la gestione dei contenuti dinamici?",
+                options: [
+                    "Aggiornare continuamente",
+                    "Contenuti statici",
+                    "Aggiornamenti intelligenti e configurabili",
+                    "Aggiornamenti manuali"
+                ],
+                correct: 2,
+                explanation: "Gli aggiornamenti dei contenuti dovrebbero bilanciare freschezza e prestazioni."
+            },
+            {
+                question: "Come dovrebbe essere implementata la condivisione tra app?",
+                options: [
+                    "Condividere tutto",
+                    "Nessuna condivisione",
+                    "Condivisione contestuale e sicura",
+                    "Condivisione limitata"
+                ],
+                correct: 2,
+                explanation: "La condivisione tra app dovrebbe essere sicura e appropriata al contesto."
+            },
+            {
+                question: "Quale approccio è migliore per il feedback degli utenti?",
+                options: [
+                    "Richiedere feedback continuo",
+                    "Non raccogliere feedback",
+                    "Offrire canali appropriati per il feedback",
+                    "Feedback solo tramite recensioni"
+                ],
+                correct: 2,
+                explanation: "Il feedback degli utenti dovrebbe essere facile da fornire quando desiderato."
+            },
+            {
+                question: "Come dovrebbe essere implementato il supporto per più finestre?",
+                options: [
+                    "Una sola finestra",
+                    "Infinite finestre",
+                    "Supporto appropriato al contesto",
+                    "Finestre solo per admin"
+                ],
+                correct: 2,
+                explanation: "Il supporto multi-finestra dovrebbe migliorare la produttività quando appropriato."
+            },
+            {
+                question: "Quale approccio è migliore per la gestione dei contenuti offline?",
+                options: [
+                    "Tutto disponibile offline",
+                    "Niente offline",
+                    "Contenuti chiave disponibili offline",
+                    "Solo cache temporanea"
+                ],
+                correct: 2,
+                explanation: "I contenuti offline dovrebbero essere gestiti in modo intelligente e utile."
+            },
+            {
+                question: "Come dovrebbe essere implementata l'integrazione con Siri?",
+                options: [
+                    "Nessuna integrazione",
+                    "Controllo totale via Siri",
+                    "Integrazione per azioni chiave",
+                    "Siri come unica interfaccia"
+                ],
+                correct: 2,
+                explanation: "L'integrazione con Siri dovrebbe fornire scorciatoie utili per le azioni principali."
             }
         ]
     }
@@ -550,44 +1106,58 @@ function getNextBatchOfQuestions() {
 
 // Display question function
 function displayQuestion() {
-    if (!currentCategory || !questionOrder[currentQuestionIndex]) {
-        console.error('Invalid quiz state');
-        return;
-    }
-
-    const question = questionOrder[currentQuestionIndex];
-    questionText.textContent = question.question;
+    const currentQuestion = quizData[currentCategory].questions[currentQuestionIndex];
+    
+    // Randomizza le opzioni
+    const originalOptions = [...currentQuestion.options];
+    const shuffledOptions = shuffleArray(originalOptions);
+    
+    // Trova il nuovo indice della risposta corretta
+    const correctIndex = shuffledOptions.indexOf(originalOptions[currentQuestion.correct]);
+    
+    questionText.textContent = currentQuestion.question;
     optionsContainer.innerHTML = '';
-
-    // Create and display options
-    question.options.forEach((option, index) => {
-        const optionElement = document.createElement('div');
-        optionElement.className = 'option';
-        optionElement.textContent = option;
-        optionElement.addEventListener('click', () => selectOption(index));
-        optionsContainer.appendChild(optionElement);
+    
+    shuffledOptions.forEach((option, index) => {
+        const button = document.createElement('button');
+        button.className = 'option';
+        button.textContent = option;
+        button.onclick = () => checkAnswer(index, correctIndex);
+        optionsContainer.appendChild(button);
     });
-
-    // Restore previous answer if exists
-    if (userAnswers[currentQuestionIndex] !== undefined) {
-        const optionElements = optionsContainer.querySelectorAll('.option');
-        optionElements[userAnswers[currentQuestionIndex]].classList.add('selected');
-        updateFeedback();
-    }
-
-    // Update navigation buttons
-    prevButton.disabled = currentQuestionIndex === 0;
-    nextButton.textContent = currentQuestionIndex === questionOrder.length - 1 ? 'Finish Quiz' : 'Next';
-    nextButton.className = currentQuestionIndex === questionOrder.length - 1 ? 'btn btn-primary' : 'btn btn-secondary';
-    updateTimer();
+    
+    // Nascondi il feedback
+    feedbackContainer.style.display = 'none';
+    feedbackText.textContent = '';
+    explanationText.textContent = '';
+    
+    updateNavigationButtons();
 }
 
-// Select option function
-function selectOption(index) {
+function selectOption(selectedIndex, correctIndex) {
     const optionElements = optionsContainer.querySelectorAll('.option');
     optionElements.forEach(element => element.classList.remove('selected'));
-    optionElements[index].classList.add('selected');
-    userAnswers[currentQuestionIndex] = index;
+    optionElements[selectedIndex].classList.add('selected');
+    
+    const isCorrect = selectedIndex === correctIndex;
+    userAnswers[currentQuestionIndex] = isCorrect ? correctIndex : selectedIndex;
+    
+    if (isCorrect) {
+        score++;
+        playSound('correct');
+    } else {
+        playSound('wrong');
+    }
+    
+    optionElements.forEach((option, index) => {
+        option.disabled = true;
+        if (index === correctIndex) {
+            option.classList.add('correct');
+        } else if (index === selectedIndex && !isCorrect) {
+            option.classList.add('wrong');
+        }
+    });
+    
     updateFeedback();
 }
 
@@ -644,58 +1214,101 @@ function showNextQuestion() {
 
 // Show results function
 function showResults() {
-    const correctAnswers = userAnswers.filter((answer, index) => 
-        answer === questionOrder[index].correct
-    ).length;
-    const wrongAnswers = userAnswers.length - correctAnswers;
+    const quizContainer = document.getElementById('quiz-container');
+    const resultsContainer = document.getElementById('results');
+    const score = calculateScore();
+    const totalQuestions = getCurrentQuiz().questions.length;
+    const percentage = (score / totalQuestions) * 100;
 
-    correctCount.textContent = correctAnswers;
-    wrongCount.textContent = wrongAnswers;
+    quizContainer.style.display = 'none';
+    resultsContainer.style.display = 'block';
 
-    // Update answered questions set
-    questionOrder.forEach((_, index) => {
-        answeredQuestions.add(index);
-    });
+    let resultMessage = `
+        <h2>Risultati del Quiz</h2>
+        <p>Hai risposto correttamente a ${score} domande su ${totalQuestions}</p>
+        <p>Percentuale di successo: ${percentage.toFixed(1)}%</p>
+    `;
 
-    quizSummary.innerHTML = '';
-    userAnswers.forEach((answer, index) => {
-        const question = questionOrder[index];
-        const isCorrect = answer === question.correct;
-        const summaryItem = document.createElement('div');
-        summaryItem.className = `summary-item ${isCorrect ? 'correct' : 'wrong'}`;
-        summaryItem.innerHTML = `
-            <strong>Question ${index + 1}:</strong> ${question.question}<br>
-            <strong>Your answer:</strong> ${question.options[answer]}<br>
-            <strong>Correct answer:</strong> ${question.options[question.correct]}<br>
-            <strong>Explanation:</strong> ${question.explanation}
+    // Aggiungo il video tutorial per il quiz OOP
+    if (currentCategory === 'oop' && percentage >= 60) {
+        resultMessage += `
+            <div class="tutorial-section">
+                <h3>Complimenti! Vuoi approfondire le tue conoscenze?</h3>
+                <p>Guarda questo tutorial su UI/UX Design:</p>
+                <div class="video-container">
+                    <iframe 
+                        width="560" 
+                        height="315" 
+                        src="https://www.youtube.com/embed/6FzLp5j-Rl4?start=578" 
+                        title="Tutorial UI/UX Design" 
+                        frameborder="0" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                        allowfullscreen>
+                    </iframe>
+                </div>
+                <p class="tutorial-description">
+                    Questo video ti aiuterà a consolidare le tue conoscenze di UI/UX Design 
+                    e a comprendere meglio i concetti affrontati nel quiz.
+                </p>
+            </div>
         `;
-        quizSummary.appendChild(summaryItem);
-    });
+    }
 
-    quizScreen.classList.remove('active');
-    resultsScreen.classList.add('active');
+    resultMessage += `
+        <button onclick="restartQuiz()" class="btn">Riprova</button>
+        <button onclick="goToHome()" class="btn">Torna alla Home</button>
+    `;
 
-    // Update continue button text based on remaining batches
-    const remainingQuestions = TOTAL_QUESTIONS - answeredQuestions.size;
-    continueButton.textContent = remainingQuestions > 0 ? 'Continue to Next Batch' : 'Start New Quiz';
+    resultsContainer.innerHTML = resultMessage;
 }
 
 // End quiz function
 function endQuiz() {
-    const totalMinutes = Math.floor(totalTime / 60);
-    const totalSeconds = totalTime % 60;
+    // Ferma il timer
+    stopTimer();
     
-    const summary = document.createElement('div');
-    summary.className = 'summary';
-    summary.innerHTML = `
-        <h2>Riepilogo Finale</h2>
-        <p>Tempo totale impiegato: ${totalMinutes}:${totalSeconds.toString().padStart(2, '0')}</p>
-        <p>Punteggio finale: ${score} su ${currentQuiz.questions.length}</p>
-        <button onclick="showHomeScreen()">Torna alla Home</button>
+    // Prepara il sommario delle risposte
+    let summary = '<div class="summary">';
+    summary += '<h2>Sommario del Quiz</h2>';
+    summary += `<p>Hai completato ${currentQuestionIndex + 1} domande su ${questionOrder.length}</p>`;
+    summary += `<p>Punteggio: ${score} su ${currentQuestionIndex + 1}</p>`;
+    summary += `<p>Tempo impiegato: ${formatTime(timerSeconds)}</p>`;
+    summary += '<h3>Le tue risposte:</h3>';
+    
+    // Aggiungi ogni domanda e risposta al sommario
+    for (let i = 0; i <= currentQuestionIndex; i++) {
+        const question = questionOrder[i];
+        const userAnswer = userAnswers[i];
+        const isCorrect = userAnswer === question.correct;
+        
+        summary += `
+            <div class="question-summary ${isCorrect ? 'correct' : 'incorrect'}">
+                <p><strong>Domanda ${i + 1}:</strong> ${question.question}</p>
+                <p>La tua risposta: ${question.options[userAnswer]}</p>
+                <p>Risposta corretta: ${question.options[question.correct]}</p>
+                <p>Spiegazione: ${question.explanation}</p>
+            </div>
+        `;
+    }
+    
+    // Aggiungi pulsanti per tornare alla home o continuare
+    summary += `
+        <div class="summary-buttons">
+            <button onclick="window.location.reload()" class="btn btn-primary">Torna alla Home</button>
+            <button onclick="continueQuiz()" class="btn btn-success">Continua il Quiz</button>
+        </div>
     `;
+    summary += '</div>';
     
-    document.getElementById('quiz-container').innerHTML = '';
-    document.getElementById('quiz-container').appendChild(summary);
+    // Mostra il sommario
+    document.querySelector('.quiz-container').innerHTML = summary;
+}
+
+function formatTime(seconds) {
+    const hours = Math.floor(seconds / 3600);
+    const minutes = Math.floor((seconds % 3600) / 60);
+    const secs = seconds % 60;
+    return `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
 }
 
 // Continue quiz function
@@ -766,4 +1379,305 @@ function updateTimerDisplay() {
     
     const display = `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
     document.getElementById('timer').textContent = display;
+}
+
+function shuffleArray(array) {
+    const newArray = [...array];
+    for (let i = newArray.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
+    }
+    return newArray;
+}
+
+function playSound(sound) {
+    // Implementation of playSound function
+}
+
+function updateProgress() {
+    // Implementation of updateProgress function
+}
+
+// Funzione per aggiornare i pulsanti di navigazione
+function updateNavigationButtons() {
+    const prevButton = document.getElementById('prev-button');
+    const nextButton = document.getElementById('next-button');
+    const endButton = document.getElementById('end-button');
+
+    if (prevButton) {
+        prevButton.disabled = currentQuestionIndex === 0;
+    }
+
+    if (nextButton) {
+        nextButton.textContent = currentQuestionIndex === quizData[currentCategory].questions.length - 1 ? 'Finish Quiz' : 'Next';
+        nextButton.className = currentQuestionIndex === quizData[currentCategory].questions.length - 1 ? 'btn btn-primary' : 'btn btn-secondary';
+    }
+
+    if (endButton) {
+        endButton.style.display = currentQuestionIndex > 0 ? 'block' : 'none';
+    }
+}
+
+// Funzione per controllare la risposta
+function checkAnswer(selectedIndex, correctIndex) {
+    const options = document.querySelectorAll('.option');
+    
+    // Disabilita tutti i pulsanti
+    options.forEach(button => button.disabled = true);
+    
+    // Rimuovi le classi precedenti
+    options.forEach(button => {
+        button.classList.remove('correct', 'wrong', 'selected');
+    });
+    
+    // Aggiungi le classi appropriate con un leggero ritardo per l'animazione
+    setTimeout(() => {
+        options.forEach((button, index) => {
+            if (index === correctIndex) {
+                button.classList.add('correct');
+            }
+            if (index === selectedIndex && selectedIndex !== correctIndex) {
+                button.classList.add('wrong');
+            }
+            if (index === selectedIndex) {
+                button.classList.add('selected');
+            }
+        });
+    }, 100);
+    
+    // Mostra il feedback
+    const isCorrect = selectedIndex === correctIndex;
+    feedbackContainer.style.display = 'block';
+    feedbackText.textContent = isCorrect ? 'Corretto!' : 'Sbagliato!';
+    feedbackText.className = isCorrect ? 'text-success' : 'text-danger';
+    explanationText.textContent = quizData[currentCategory].questions[currentQuestionIndex].explanation;
+    
+    // Anima il container del feedback
+    feedbackContainer.style.opacity = '0';
+    setTimeout(() => {
+        feedbackContainer.style.opacity = '1';
+    }, 100);
+    
+    // Aggiorna il punteggio e salva la risposta
+    if (isCorrect) {
+        score++;
+    }
+    
+    userAnswers[currentQuestionIndex] = {
+        selected: selectedIndex,
+        correct: correctIndex,
+        isCorrect: isCorrect
+    };
+}
+
+// Funzioni di disegno per Canvas
+function drawCircle(ctx, x, y, radius, color = '#000000') {
+    ctx.beginPath();
+    ctx.arc(x, y, radius, 0, Math.PI * 2);
+    ctx.fillStyle = color;
+    ctx.fill();
+    ctx.stroke();
+}
+
+function drawSquare(ctx, x, y, size, color = '#000000') {
+    ctx.fillStyle = color;
+    ctx.fillRect(x - size/2, y - size/2, size, size);
+    ctx.strokeRect(x - size/2, y - size/2, size, size);
+}
+
+function drawTriangle(ctx, x, y, size, color = '#000000') {
+    ctx.beginPath();
+    ctx.moveTo(x, y - size);
+    ctx.lineTo(x + size, y + size);
+    ctx.lineTo(x - size, y + size);
+    ctx.closePath();
+    ctx.fillStyle = color;
+    ctx.fill();
+    ctx.stroke();
+}
+
+function drawPolygon(ctx, x, y, radius, sides) {
+    ctx.beginPath();
+    for (let i = 0; i < sides; i++) {
+        const angle = (i * 2 * Math.PI / sides) - Math.PI / 2;
+        const px = x + Math.cos(angle) * radius;
+        const py = y + Math.sin(angle) * radius;
+        if (i === 0) {
+            ctx.moveTo(px, py);
+        } else {
+            ctx.lineTo(px, py);
+        }
+    }
+    ctx.closePath();
+    ctx.fillStyle = '#FFFFFF';
+    ctx.fill();
+    ctx.stroke();
+}
+
+function drawDice(ctx, x, y, size, number) {
+    // Disegna il dado
+    ctx.fillStyle = '#FFFFFF';
+    ctx.fillRect(x - size/2, y - size/2, size, size);
+    ctx.strokeRect(x - size/2, y - size/2, size, size);
+    
+    // Disegna i punti
+    const dotSize = size/8;
+    const positions = {
+        1: [[0, 0]],
+        2: [[-1, -1], [1, 1]],
+        3: [[-1, -1], [0, 0], [1, 1]],
+        4: [[-1, -1], [1, -1], [-1, 1], [1, 1]],
+        5: [[-1, -1], [1, -1], [0, 0], [-1, 1], [1, 1]],
+        6: [[-1, -1], [1, -1], [-1, 0], [1, 0], [-1, 1], [1, 1]]
+    };
+    
+    ctx.fillStyle = '#000000';
+    positions[number].forEach(pos => {
+        drawCircle(ctx, x + pos[0] * size/3, y + pos[1] * size/3, dotSize);
+    });
+}
+
+function drawDomino(ctx, x, y, size, top, bottom) {
+    const width = size;
+    const height = size * 2;
+    
+    // Disegna il domino
+    ctx.fillStyle = '#FFFFFF';
+    ctx.fillRect(x - width/2, y - height/2, width, height);
+    ctx.strokeRect(x - width/2, y - height/2, width, height);
+    
+    // Linea divisoria
+    ctx.beginPath();
+    ctx.moveTo(x - width/2, y);
+    ctx.lineTo(x + width/2, y);
+    ctx.stroke();
+    
+    // Disegna i punti
+    const dotSize = size/8;
+    const positions = {
+        0: [],
+        1: [[0, 0]],
+        2: [[-1, -1], [1, 1]],
+        3: [[-1, -1], [0, 0], [1, 1]],
+        4: [[-1, -1], [1, -1], [-1, 1], [1, 1]],
+        5: [[-1, -1], [1, -1], [0, 0], [-1, 1], [1, 1]],
+        6: [[-1, -1], [1, -1], [-1, 0], [1, 0], [-1, 1], [1, 1]]
+    };
+    
+    ctx.fillStyle = '#000000';
+    // Punti superiori
+    positions[top].forEach(pos => {
+        drawCircle(ctx, x + pos[0] * size/3, y - height/4 + pos[1] * size/3, dotSize);
+    });
+    // Punti inferiori
+    positions[bottom].forEach(pos => {
+        drawCircle(ctx, x + pos[0] * size/3, y + height/4 + pos[1] * size/3, dotSize);
+    });
+}
+
+function animateSequence(sequence) {
+    const canvas = document.getElementById('questionCanvas');
+    const ctx = canvas.getContext('2d');
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    
+    sequence.forEach((item, index) => {
+        const x = 50 + (index * 100);
+        const y = 50;
+        
+        if (item.type === 'square') {
+            drawSquare(ctx, x, y, 30);
+            // Disegna i punti
+            for (let i = 0; i < item.points; i++) {
+                const pointX = x + (i % 3) * 10;
+                const pointY = y + Math.floor(i / 3) * 10;
+                drawCircle(ctx, pointX, pointY, 2);
+            }
+        }
+    });
+}
+
+function animateGeometricSequence(sequence) {
+    const canvas = document.getElementById('questionCanvas');
+    const ctx = canvas.getContext('2d');
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    
+    sequence.forEach((type, index) => {
+        const x = 50 + (index * 100);
+        const y = 50;
+        
+        switch(type) {
+            case 'triangle':
+                drawTriangle(ctx, x, y, 30);
+                break;
+            case 'square':
+                drawSquare(ctx, x, y, 30);
+                break;
+            case 'pentagon':
+                drawPolygon(ctx, x, y, 15, 5);
+                break;
+            case 'hexagon':
+                drawPolygon(ctx, x, y, 15, 6);
+                break;
+        }
+    });
+}
+
+function animateGrid(symbols, rows, cols) {
+    const canvas = document.getElementById('questionCanvas');
+    const ctx = canvas.getContext('2d');
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    
+    symbols.forEach((symbol, index) => {
+        const row = Math.floor(index / cols);
+        const col = index % cols;
+        const x = 50 + (col * 100);
+        const y = 50 + (row * 100);
+        
+        switch(symbol) {
+            case 'star':
+                drawStar(ctx, x, y, 20);
+                break;
+            case 'moon':
+                drawMoon(ctx, x, y, 20);
+                break;
+            case 'sun':
+                drawSun(ctx, x, y, 20);
+                break;
+        }
+    });
+}
+
+function drawStar(ctx, x, y, size) {
+    ctx.beginPath();
+    for (let i = 0; i < 5; i++) {
+        const angle = (i * 4 * Math.PI) / 5;
+        const radius = i % 2 === 0 ? size : size / 2;
+        const px = x + Math.sin(angle) * radius;
+        const py = y - Math.cos(angle) * radius;
+        if (i === 0) ctx.moveTo(px, py);
+        else ctx.lineTo(px, py);
+    }
+    ctx.closePath();
+    ctx.stroke();
+}
+
+function drawMoon(ctx, x, y, size) {
+    ctx.beginPath();
+    ctx.arc(x, y, size, 0.5 * Math.PI, 1.5 * Math.PI);
+    ctx.stroke();
+}
+
+function drawSun(ctx, x, y, size) {
+    ctx.beginPath();
+    ctx.arc(x, y, size, 0, 2 * Math.PI);
+    ctx.stroke();
+    
+    // Raggi del sole
+    for (let i = 0; i < 8; i++) {
+        const angle = (i * Math.PI) / 4;
+        ctx.beginPath();
+        ctx.moveTo(x + Math.sin(angle) * size, y - Math.cos(angle) * size);
+        ctx.lineTo(x + Math.sin(angle) * (size + 10), y - Math.cos(angle) * (size + 10));
+        ctx.stroke();
+    }
 } 
