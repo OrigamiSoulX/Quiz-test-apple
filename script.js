@@ -809,18 +809,18 @@ function shuffleArray(array) {
 }
 
 function showQuestion() {
-    const question = currentQuestions[currentQuestionIndex];
-    const shuffledOptions = shuffleArray(question.options);
-    const correctAnswerIndex = shuffledOptions.indexOf(question.options[question.correct]);
+    const currentQuestion = quizData[currentCategory].questions[currentQuestionIndex];
+    const shuffledOptions = shuffleArray(currentQuestion.options);
+    const correctAnswerIndex = shuffledOptions.indexOf(currentQuestion.options[currentQuestion.correct]);
     
-    document.getElementById('question').textContent = question.question;
-    const optionsContainer = document.getElementById('options');
+    questionText.textContent = currentQuestion.question;
+    
     optionsContainer.innerHTML = '';
-    
     shuffledOptions.forEach((option, index) => {
         const button = document.createElement('button');
         button.textContent = option;
-        button.onclick = () => checkAnswer(index, correctAnswerIndex);
+        button.classList.add('option');
+        button.addEventListener('click', () => checkAnswer(index, correctAnswerIndex));
         optionsContainer.appendChild(button);
     });
     
@@ -828,7 +828,7 @@ function showQuestion() {
 }
 
 function checkAnswer(selectedIndex, correctIndex) {
-    const question = currentQuestions[currentQuestionIndex];
+    const currentQuestion = quizData[currentCategory].questions[currentQuestionIndex];
     const isCorrect = selectedIndex === correctIndex;
     
     if (isCorrect) {
@@ -838,21 +838,22 @@ function checkAnswer(selectedIndex, correctIndex) {
         playSound('wrong');
     }
     
-    userAnswers[currentQuestionIndex] = selectedIndex;
-    showFeedback(isCorrect, question.explanation);
+    const options = optionsContainer.querySelectorAll('.option');
+    options.forEach((option, index) => {
+        option.disabled = true;
+        if (index === correctIndex) {
+            option.classList.add('correct');
+        } else if (index === selectedIndex && !isCorrect) {
+            option.classList.add('wrong');
+        }
+    });
     
-    // Disabilita tutti i pulsanti dopo la risposta
-    const buttons = document.querySelectorAll('#options button');
-    buttons.forEach(button => button.disabled = true);
-    
-    // Evidenzia la risposta corretta
-    buttons[correctIndex].classList.add('correct');
-    if (!isCorrect) {
-        buttons[selectedIndex].classList.add('wrong');
-    }
-    
-    // Abilita il pulsante Next dopo un breve ritardo
     setTimeout(() => {
-        document.getElementById('next-button').disabled = false;
-    }, 1000);
+        currentQuestionIndex++;
+        if (currentQuestionIndex < quizData[currentCategory].questions.length) {
+            showQuestion();
+        } else {
+            endQuiz();
+        }
+    }, 1500);
 } 
