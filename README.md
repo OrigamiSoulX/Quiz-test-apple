@@ -1,3 +1,8 @@
+IS NOT A OFFICIAL APPS FOR APPLE DEVELOPER ACCADEMY
+IS FREE! AND FOR COMMUNITY! THIS IS A BETA TEST!
+
+# I USED ALL THE INFORMATION AND LIBRARIES PRESENT WITHIN moodle.developeracademy.unina.it AND USED THE AI ( NOTEBOOKLM, CHATGPT AND CURSOR ) TO CREATE THE quiz questions and answers. !the answers and information may be incorrect!
+
 # Quiz Application
 
 Un'applicazione web interattiva per quiz su vari argomenti, inclusi:
