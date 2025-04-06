@@ -550,30 +550,30 @@ function getNextBatchOfQuestions() {
 
 // Display question function
 function displayQuestion() {
-    if (!currentCategory || !questionOrder[currentQuestionIndex]) {
-        console.error('Invalid quiz state');
-        return;
-    }
-
-    const question = questionOrder[currentQuestionIndex];
-    questionText.textContent = question.question;
+    const currentQuestion = quizData[currentCategory].questions[currentQuestionIndex];
+    
+    // Crea un array di oggetti che contiene sia l'opzione che il suo indice originale
+    const optionsWithIndices = currentQuestion.options.map((option, index) => ({
+        text: option,
+        isCorrect: index === currentQuestion.correct
+    }));
+    
+    // Mescola l'array delle opzioni
+    const shuffledOptions = shuffleArray(optionsWithIndices);
+    
+    // Trova il nuovo indice della risposta corretta
+    const correctAnswerIndex = shuffledOptions.findIndex(option => option.isCorrect);
+    
+    questionText.textContent = currentQuestion.question;
+    
     optionsContainer.innerHTML = '';
-
-    // Create and display options
-    question.options.forEach((option, index) => {
-        const optionElement = document.createElement('div');
-        optionElement.className = 'option';
-        optionElement.textContent = option;
-        optionElement.addEventListener('click', () => selectOption(index));
-        optionsContainer.appendChild(optionElement);
+    shuffledOptions.forEach((option, index) => {
+        const button = document.createElement('button');
+        button.textContent = option.text;
+        button.classList.add('option');
+        button.addEventListener('click', () => selectOption(index, correctAnswerIndex));
+        optionsContainer.appendChild(button);
     });
-
-    // Restore previous answer if exists
-    if (userAnswers[currentQuestionIndex] !== undefined) {
-        const optionElements = optionsContainer.querySelectorAll('.option');
-        optionElements[userAnswers[currentQuestionIndex]].classList.add('selected');
-        updateFeedback();
-    }
 
     // Update navigation buttons
     prevButton.disabled = currentQuestionIndex === 0;
@@ -582,12 +582,30 @@ function displayQuestion() {
     updateTimer();
 }
 
-// Select option function
-function selectOption(index) {
+function selectOption(selectedIndex, correctIndex) {
     const optionElements = optionsContainer.querySelectorAll('.option');
     optionElements.forEach(element => element.classList.remove('selected'));
-    optionElements[index].classList.add('selected');
-    userAnswers[currentQuestionIndex] = index;
+    optionElements[selectedIndex].classList.add('selected');
+    
+    const isCorrect = selectedIndex === correctIndex;
+    userAnswers[currentQuestionIndex] = isCorrect ? correctIndex : selectedIndex;
+    
+    if (isCorrect) {
+        score++;
+        playSound('correct');
+    } else {
+        playSound('wrong');
+    }
+    
+    optionElements.forEach((option, index) => {
+        option.disabled = true;
+        if (index === correctIndex) {
+            option.classList.add('correct');
+        } else if (index === selectedIndex && !isCorrect) {
+            option.classList.add('wrong');
+        }
+    });
+    
     updateFeedback();
 }
 
@@ -808,62 +826,10 @@ function shuffleArray(array) {
     return newArray;
 }
 
-function showQuestion() {
-    const currentQuestion = quizData[currentCategory].questions[currentQuestionIndex];
-    
-    // Crea un array di oggetti che contiene sia l'opzione che il suo indice originale
-    const optionsWithIndices = currentQuestion.options.map((option, index) => ({
-        text: option,
-        isCorrect: index === currentQuestion.correct
-    }));
-    
-    // Mescola l'array delle opzioni
-    const shuffledOptions = shuffleArray(optionsWithIndices);
-    
-    // Trova il nuovo indice della risposta corretta
-    const correctAnswerIndex = shuffledOptions.findIndex(option => option.isCorrect);
-    
-    questionText.textContent = currentQuestion.question;
-    
-    optionsContainer.innerHTML = '';
-    shuffledOptions.forEach((option, index) => {
-        const button = document.createElement('button');
-        button.textContent = option.text;
-        button.classList.add('option');
-        button.addEventListener('click', () => checkAnswer(index, correctAnswerIndex));
-        optionsContainer.appendChild(button);
-    });
-    
-    updateProgress();
+function playSound(sound) {
+    // Implementation of playSound function
 }
 
-function checkAnswer(selectedIndex, correctIndex) {
-    const currentQuestion = quizData[currentCategory].questions[currentQuestionIndex];
-    const isCorrect = selectedIndex === correctIndex;
-    
-    if (isCorrect) {
-        score++;
-        playSound('correct');
-    } else {
-        playSound('wrong');
-    }
-    
-    const options = optionsContainer.querySelectorAll('.option');
-    options.forEach((option, index) => {
-        option.disabled = true;
-        if (index === correctIndex) {
-            option.classList.add('correct');
-        } else if (index === selectedIndex && !isCorrect) {
-            option.classList.add('wrong');
-        }
-    });
-    
-    setTimeout(() => {
-        currentQuestionIndex++;
-        if (currentQuestionIndex < quizData[currentCategory].questions.length) {
-            showQuestion();
-        } else {
-            endQuiz();
-        }
-    }, 1500);
+function updateProgress() {
+    // Implementation of updateProgress function
 } 
