@@ -11,8 +11,6 @@ Un'applicazione web interattiva per quiz su vari argomenti, inclusi:
 - 4 quiz completi con 50 domande ciascuno
 - Interfaccia utente moderna e responsive
 - Feedback immediato sulle risposte
-- Sistema di punteggio
-- Effetti sonori per feedback
 - Domande presentate in gruppi di 10
 - Selezione casuale delle domande senza ripetizioni
 
@@ -50,7 +48,7 @@ git clone https://github.com/OrigamiSoulX/Quiz-test-apple.git
 
 2. Apri il file `index.html` nel tuo browser preferito
 
-Oppure visita la versione live su Vercel: [Link al deployment]
+
 
 ## 🎮 Come Giocare
 
@@ -65,7 +63,6 @@ Oppure visita la versione live su Vercel: [Link al deployment]
 - Interfaccia pulita e moderna
 - Design responsive che funziona su desktop e mobile
 - Animazioni fluide
-- Feedback visivi e sonori
 
 ## 📝 Note
 
@@ -93,6 +90,4 @@ Questo progetto è distribuito sotto la licenza MIT. Vedi il file `LICENSE` per 
 - GitHub: [@OrigamiSoulX](https://github.com/OrigamiSoulX)
 
 ## 🙏 Ringraziamenti
-
-- Suoni: [Freesound](https://freesound.org/)
 - Ispirazione: [MDN Web Docs](https://developer.mozilla.org/) 
