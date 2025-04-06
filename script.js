@@ -116,84 +116,183 @@ const quizData = {
         ]
     },
     algebra: {
-        title: "Algebra and Mathematical Logic Quiz",
+        title: "Test di Logica e Ragionamento",
         questions: [
             {
-                question: "What is the next number in the sequence: 2, 4, 8, 16, ...?",
+                question: "Osserva la sequenza di figure e indica quale sarà la prossima:",
+                drawFunction: (ctx) => {
+                    // Disegna una sequenza di figure con punti crescenti
+                    const figures = [
+                        { type: 'square', points: 1 },
+                        { type: 'square', points: 2 },
+                        { type: 'square', points: 4 },
+                        { type: 'square', points: 7 }
+                    ];
+                    
+                    figures.forEach((fig, i) => {
+                        const x = 50 + i * 70;
+                        const y = 150;
+                        drawSquare(ctx, x, y, 50);
+                        // Disegna i punti
+                        for (let j = 0; j < fig.points; j++) {
+                            const angle = (j * 2 * Math.PI) / fig.points;
+                            const px = x + Math.cos(angle) * 20;
+                            const py = y + Math.sin(angle) * 20;
+                            drawCircle(ctx, px, py, 5);
+                        }
+                    });
+                },
                 options: [
-                    "24",
-                    "32",
-                    "20",
-                    "28"
-                ],
-                correct: 1,
-                explanation: "Each number is multiplied by 2 to get the next number in the sequence."
-            },
-            {
-                question: "What is the probability of rolling a 6 on a standard die?",
-                options: [
-                    "1/3",
-                    "1/2",
-                    "1/6",
-                    "1/4"
+                    "13 punti",
+                    "15 punti",
+                    "16 punti",
+                    "18 punti"
                 ],
                 correct: 2,
-                explanation: "A standard die has 6 faces, so the probability of rolling any specific number is 1 out of 6."
+                explanation: "La differenza tra numeri consecutivi aumenta di 1 ogni volta: +1, +2, +3, +4, quindi il prossimo sarà +5, cioè 11+5=16."
             },
             {
-                question: "Complete the sequence: A, C, E, G, ...",
+                question: "Osserva la rotazione delle figure e indica la posizione finale:",
+                drawFunction: (ctx) => {
+                    // Disegna un cerchio e un triangolo con rotazioni
+                    const centerX = 150;
+                    const centerY = 150;
+                    
+                    // Disegna il cerchio iniziale
+                    drawCircle(ctx, centerX, centerY, 30);
+                    
+                    // Disegna il triangolo iniziale
+                    drawTriangle(ctx, centerX + 100, centerY, 30);
+                    
+                    // Disegna le frecce di rotazione
+                    ctx.beginPath();
+                    ctx.moveTo(centerX + 40, centerY);
+                    ctx.lineTo(centerX + 60, centerY);
+                    ctx.stroke();
+                    
+                    ctx.beginPath();
+                    ctx.moveTo(centerX + 140, centerY);
+                    ctx.lineTo(centerX + 160, centerY);
+                    ctx.stroke();
+                },
                 options: [
-                    "H",
-                    "F",
-                    "J",
-                    "I"
+                    "180 gradi",
+                    "270 gradi",
+                    "300 gradi",
+                    "360 gradi"
+                ],
+                correct: 1,
+                explanation: "Il cerchio ruota di 180° (45° × 4) in senso orario, il triangolo di 120° (30° × 4) in senso antiorario. La differenza totale è 180° + 120° = 300°."
+            },
+            {
+                question: "Completa la sequenza di figure geometriche:",
+                drawFunction: (ctx) => {
+                    // Disegna una sequenza di figure geometriche
+                    const figures = ['triangle', 'square', 'pentagon', 'hexagon'];
+                    figures.forEach((fig, i) => {
+                        const x = 50 + i * 70;
+                        const y = 150;
+                        switch(fig) {
+                            case 'triangle':
+                                drawTriangle(ctx, x, y, 30);
+                                break;
+                            case 'square':
+                                drawSquare(ctx, x, y, 50);
+                                break;
+                            case 'pentagon':
+                                drawPolygon(ctx, x, y, 30, 5);
+                                break;
+                            case 'hexagon':
+                                drawPolygon(ctx, x, y, 30, 6);
+                                break;
+                        }
+                    });
+                },
+                options: [
+                    "Triangolo",
+                    "Quadrato",
+                    "Pentagono",
+                    "Esagono"
+                ],
+                correct: 2,
+                explanation: "La sequenza si ripete ogni 4 figure. 15 diviso 4 dà resto 3, quindi sarà la terza figura della sequenza: Pentagono."
+            },
+            {
+                question: "In una griglia 3x3, ci sono 3 cerchi e 3 quadrati disposti in modo che non ce ne siano 3 uguali in linea. Quante disposizioni diverse sono possibili?",
+                options: [
+                    "12",
+                    "18",
+                    "24",
+                    "30"
+                ],
+                correct: 1,
+                explanation: "Per evitare tre figure uguali in linea, ci sono 18 disposizioni possibili considerando le rotazioni e i riflessi come configurazioni diverse."
+            },
+            {
+                question: "Se in una sequenza ogni figura è composta da un numero di lati pari alla somma dei lati delle due figure precedenti, e le prime due figure sono un triangolo e un quadrato, quanti lati avrà la quinta figura della sequenza?",
+                options: [
+                    "21",
+                    "24",
+                    "28",
+                    "34"
+                ],
+                correct: 2,
+                explanation: "Triangolo (3), Quadrato (4), 7 lati, 11 lati, 18 lati, 28 lati. È come la sequenza di Fibonacci ma partendo da 3 e 4."
+            },
+            {
+                question: "In un pattern di figure bianche e nere, ogni figura segue questa regola: se le due figure precedenti sono diverse, la figura è nera; se sono uguali, è bianca. Se la sequenza inizia con Bianca, Nera, quale sarà il colore della ottava figura?",
+                options: [
+                    "Bianca",
+                    "Nera",
+                    "Non può essere determinato",
+                    "Dipende dalla sesta figura"
+                ],
+                correct: 0,
+                explanation: "Seguendo la regola: B,N,N,B,N,N,B,B. L'ottava figura sarà Bianca perché le due precedenti sono diverse."
+            },
+            {
+                question: "In una serie di dadi, ogni dado successivo viene ruotato di 90° verso destra e poi di 90° verso l'alto. Se si parte con il numero 1 in alto, quale numero sarà in alto dopo 5 rotazioni?",
+                options: [
+                    "3",
+                    "4",
+                    "5",
+                    "6"
+                ],
+                correct: 2,
+                explanation: "Seguendo le rotazioni: 1→3→2→4→5. Dopo 5 rotazioni, il numero 5 sarà in alto."
+            },
+            {
+                question: "In una sequenza di figure concentriche (cerchio, triangolo, quadrato), ogni nuova figura alterna tra essere interna o esterna alle precedenti. Se la sequenza inizia con un cerchio, come sarà composta la quarta figura della sequenza?",
+                options: [
+                    "Quadrato esterno al cerchio",
+                    "Triangolo interno al cerchio",
+                    "Cerchio esterno al triangolo",
+                    "Quadrato interno al triangolo"
                 ],
                 correct: 3,
-                explanation: "The sequence follows the pattern of skipping one letter in the alphabet (A, skip B, C, skip D, etc.)."
+                explanation: "La sequenza è: cerchio, triangolo interno, quadrato esterno, triangolo interno al quadrato."
             },
             {
-                question: "What is the next number in the sequence: 1, 1, 2, 3, 5, 8, ...?",
+                question: "In un orologio logico, le ore si muovono di 3 posizioni in avanti e i minuti di 15 posizioni indietro ad ogni passaggio. Se si parte dalle 3:00, che ora sarà dopo 4 passaggi?",
                 options: [
+                    "7:00",
+                    "11:00",
+                    "2:00",
+                    "5:00"
+                ],
+                correct: 1,
+                explanation: "Le ore: 3→6→9→12→3. I minuti: 00→45→30→15→00. Quindi sarà 11:00."
+            },
+            {
+                question: "In una griglia di simboli, ogni riga contiene 4 simboli tra stelle, lune e soli. Se in ogni riga la somma di stelle e lune deve essere pari e ci devono essere almeno 2 soli, quante combinazioni diverse sono possibili?",
+                options: [
+                    "6",
+                    "8",
                     "10",
-                    "11",
-                    "13",
                     "12"
                 ],
                 correct: 2,
-                explanation: "This is the Fibonacci sequence where each number is the sum of the two preceding ones."
-            },
-            {
-                question: "If it takes 5 machines 5 minutes to make 5 widgets, how long would it take 100 machines to make 100 widgets?",
-                options: [
-                    "100 minutes",
-                    "5 minutes",
-                    "20 minutes",
-                    "1 minute"
-                ],
-                correct: 1,
-                explanation: "Each machine takes 5 minutes to make one widget, so 100 machines would take the same 5 minutes to make 100 widgets."
-            },
-            {
-                question: "How many fingers are there on 10 hands?",
-                options: [
-                    "100",
-                    "20",
-                    "50",
-                    "10"
-                ],
-                correct: 2,
-                explanation: "Each hand has 5 fingers, so 10 hands would have 50 fingers in total."
-            },
-            {
-                question: "What is the next number in the sequence: 1, 4, 9, 16, 25, ...?",
-                options: [
-                    "30",
-                    "36",
-                    "32",
-                    "28"
-                ],
-                correct: 1,
-                explanation: "This sequence represents perfect squares (1², 2², 3², 4², 5², ...)."
+                explanation: "Considerando le restrizioni (somma pari di stelle e lune, almeno 2 soli), ci sono 10 combinazioni possibili."
             }
         ]
     },
@@ -316,114 +415,598 @@ const quizData = {
         title: "Apple Human Interface Guidelines Quiz",
         questions: [
             {
-                question: "Qual è lo scopo principale delle Apple Human Interface Guidelines?",
+                question: "Quale principio di design meglio rappresenta l'approccio di Apple all'interfaccia utente?",
                 options: [
-                    "Fornire linee guida per lo sviluppo hardware",
-                    "Offrire raccomandazioni per progettare esperienze utente coerenti su tutte le piattaforme Apple",
-                    "Definire standard di codifica per le applicazioni Apple",
-                    "Stabilire politiche di marketing per le app"
+                    "Massima personalizzazione per ogni utente",
+                    "Semplicità e chiarezza prima di tutto",
+                    "Funzionalità avanzate in primo piano",
+                    "Design artistico e creativo"
                 ],
                 correct: 1,
-                explanation: "Le HIG forniscono indicazioni per creare interfacce utente intuitive e coerenti su macOS, iOS, watchOS, tvOS e altre piattaforme Apple."
+                explanation: "Apple privilegia la semplicità e la chiarezza, rendendo le interfacce intuitive e facili da usare per tutti gli utenti."
             },
             {
-                question: "Quale tra i seguenti è un principio chiave delle HIG di Apple?",
+                question: "In un'app di fotografia, quale sarebbe il modo migliore per presentare le funzioni di editing?",
                 options: [
-                    "Personalizzazione estrema",
-                    "Coerenza",
-                    "Sovraccarico di funzionalità",
-                    "Design complesso"
+                    "Mostrare tutte le opzioni disponibili contemporaneamente",
+                    "Presentare le funzioni più comuni e nascondere quelle avanzate in un menu secondario",
+                    "Nascondere tutte le funzioni in menu a tendina",
+                    "Creare un tutorial obbligatorio per ogni funzione"
                 ],
                 correct: 1,
-                explanation: "La coerenza assicura che le applicazioni si comportino in modo prevedibile, facilitando l'apprendimento e l'uso da parte degli utenti."
+                explanation: "Le HIG suggeriscono di mantenere l'interfaccia semplice mostrando le funzioni più comuni, permettendo agli utenti di accedere a funzionalità avanzate quando necessario."
             },
             {
-                question: "Secondo le HIG, come dovrebbero essere utilizzati i colori nelle applicazioni?",
+                question: "Come dovrebbe essere gestito il feedback dopo che un utente salva un documento?",
                 options: [
-                    "Utilizzare colori vivaci per tutti gli elementi",
-                    "Evitare l'uso del colore per indicare lo stato",
-                    "Usare i colori di sistema per garantire leggibilità e coerenza",
-                    "Utilizzare solo colori monocromatici"
+                    "Mostrare un popup che richiede conferma",
+                    "Non mostrare alcun feedback per non disturbare",
+                    "Fornire un feedback sottile ma chiaro, come un'animazione o un indicatore temporaneo",
+                    "Riprodurre un suono di notifica"
                 ],
                 correct: 2,
-                explanation: "I colori di sistema si adattano automaticamente a diverse modalità e impostazioni di accessibilità, migliorando l'esperienza utente."
+                explanation: "Il feedback dovrebbe essere chiaro ma non invasivo, confermando l'azione senza interrompere il flusso di lavoro dell'utente."
             },
             {
-                question: "Qual è la funzione principale dei pulsanti secondo le HIG?",
+                question: "Quale approccio è più appropriato per la gestione degli errori in un form?",
                 options: [
-                    "Visualizzare informazioni",
-                    "Iniziare un'azione o confermare una decisione",
-                    "Navigare tra diverse sezioni",
-                    "Decorare l'interfaccia"
+                    "Mostrare tutti gli errori alla fine della compilazione",
+                    "Evidenziare gli errori in tempo reale mentre l'utente digita",
+                    "Bloccare l'input quando viene rilevato un errore",
+                    "Resettare il form in caso di errori"
                 ],
                 correct: 1,
-                explanation: "I pulsanti sono elementi interattivi che consentono agli utenti di eseguire azioni specifiche nell'app."
+                explanation: "Il feedback immediato aiuta gli utenti a correggere gli errori mentre compilano il form, migliorando l'esperienza utente."
             },
             {
-                question: "Secondo le HIG, come dovrebbero essere progettate le icone delle app?",
+                question: "In un'app di navigazione, come dovrebbero essere presentate le direzioni?",
                 options: [
-                    "Dettagliate e complesse",
-                    "Semplici, riconoscibili e in linea con il design dell'app",
-                    "Utilizzando solo colori neutri",
-                    "Simili alle icone di altre app"
+                    "Mostrare tutte le informazioni possibili contemporaneamente",
+                    "Fornire solo le informazioni essenziali per il passo corrente",
+                    "Nascondere le direzioni in un menu",
+                    "Usare solo indicazioni testuali"
                 ],
                 correct: 1,
-                explanation: "Le icone dovrebbero essere distintive e riflettere lo stile e la funzionalità dell'app, mantenendo semplicità e riconoscibilità."
+                explanation: "Presentare solo le informazioni rilevanti per il momento riduce il carico cognitivo e aiuta l'utente a concentrarsi sul task corrente."
             },
             {
-                question: "Qual è l'obiettivo principale dell'accessibilità nelle HIG di Apple?",
+                question: "Come dovrebbe essere implementato il Dark Mode secondo le HIG?",
                 options: [
-                    "Limitare l'uso dell'app a utenti specifici",
-                    "Garantire che tutte le persone possano utilizzare l'app",
-                    "Aggiungere funzionalità avanzate per utenti esperti",
-                    "Migliorare le prestazioni dell'app"
-                ],
-                correct: 1,
-                explanation: "L'accessibilità assicura che l'app sia utilizzabile da persone con diverse esigenze e capacità, rendendo l'esperienza inclusiva per tutti."
-            },
-            {
-                question: "Come dovrebbero essere gestite le notifiche secondo le HIG?",
-                options: [
-                    "Inviare notifiche frequenti per mantenere l'utente coinvolto",
-                    "Utilizzare notifiche solo per informazioni importanti e pertinenti",
-                    "Personalizzare le notifiche con suoni unici",
-                    "Inviare notifiche in orari casuali"
-                ],
-                correct: 1,
-                explanation: "Le notifiche dovrebbero essere utilizzate con moderazione e solo per informazioni veramente importanti e rilevanti per l'utente."
-            },
-            {
-                question: "Quale approccio al design è preferito nelle HIG?",
-                options: [
-                    "Design minimalista e intuitivo",
-                    "Design complesso e dettagliato",
-                    "Design basato su tendenze temporanee",
-                    "Design che privilegia l'estetica sulla funzionalità"
-                ],
-                correct: 0,
-                explanation: "Apple privilegia un design minimalista e intuitivo che facilita l'uso dell'app senza sacrificare la funzionalità."
-            },
-            {
-                question: "Come dovrebbe essere gestito il feedback utente secondo le HIG?",
-                options: [
-                    "Fornire feedback solo in caso di errori",
-                    "Ignorare il feedback per non disturbare l'utente",
-                    "Fornire feedback immediato e chiaro per ogni azione",
-                    "Raccogliere feedback solo attraverso recensioni"
+                    "Come una semplice inversione dei colori",
+                    "Come un'esperienza completamente riprogettata",
+                    "Come una modalità che mantiene la gerarchia visiva e la leggibilità",
+                    "Come un'opzione nascosta per utenti avanzati"
                 ],
                 correct: 2,
-                explanation: "Il feedback immediato e chiaro aiuta gli utenti a capire che le loro azioni sono state registrate e processate dal sistema."
+                explanation: "Il Dark Mode dovrebbe mantenere la gerarchia visiva e la leggibilità, non essere una semplice inversione dei colori."
             },
             {
-                question: "Quale principio guida la navigazione nelle app secondo le HIG?",
+                question: "Quale approccio è migliore per la navigazione in un'app complessa?",
                 options: [
-                    "Creare percorsi di navigazione complessi",
-                    "Mantenere la navigazione semplice e intuitiva",
-                    "Nascondere le opzioni di navigazione",
-                    "Cambiare frequentemente la struttura di navigazione"
+                    "Utilizzare un menu hamburger per nascondere tutte le opzioni",
+                    "Mostrare una tab bar con le funzioni principali e organizzare logicamente le secondarie",
+                    "Creare un menu a più livelli",
+                    "Utilizzare gesture nascoste"
                 ],
                 correct: 1,
-                explanation: "Una navigazione semplice e intuitiva permette agli utenti di orientarsi facilmente nell'app e trovare ciò che cercano."
+                explanation: "Una tab bar con le funzioni principali offre accesso immediato alle funzionalità più importanti, mantenendo l'app navigabile."
+            },
+            {
+                question: "Come dovrebbe essere gestito il caricamento dei dati?",
+                options: [
+                    "Mostrare una schermata di caricamento a tutto schermo",
+                    "Non mostrare indicatori di caricamento",
+                    "Utilizzare indicatori di progresso contestuali e skeleton screens",
+                    "Bloccare l'interfaccia durante il caricamento"
+                ],
+                correct: 2,
+                explanation: "Gli indicatori contestuali e le skeleton screens mantengono l'app reattiva e informano l'utente senza bloccare l'interfaccia."
+            },
+            {
+                question: "Quale approccio è migliore per presentare le impostazioni dell'app?",
+                options: [
+                    "Mostrare tutte le impostazioni in una lunga lista",
+                    "Organizzare le impostazioni in categorie logiche con descrizioni chiare",
+                    "Nascondere le impostazioni avanzate",
+                    "Utilizzare un sistema di ricerca per le impostazioni"
+                ],
+                correct: 1,
+                explanation: "Organizzare le impostazioni in categorie logiche aiuta gli utenti a trovare facilmente quello che cercano."
+            },
+            {
+                question: "Come dovrebbe essere implementata la funzione di annullamento di un'azione?",
+                options: [
+                    "Chiedere sempre conferma prima di ogni azione",
+                    "Non permettere l'annullamento delle azioni",
+                    "Offrire un modo semplice e immediato per annullare le azioni recenti",
+                    "Nascondere l'opzione di annullamento in un menu"
+                ],
+                correct: 2,
+                explanation: "Permettere l'annullamento immediato dà sicurezza agli utenti e migliora l'esperienza d'uso."
+            },
+            {
+                question: "Quale approccio è migliore per la gestione dei permessi dell'app?",
+                options: [
+                    "Richiedere tutti i permessi all'avvio",
+                    "Richiedere i permessi solo quando necessari, spiegandone il motivo",
+                    "Non richiedere mai permessi",
+                    "Nascondere le richieste di permessi nelle impostazioni"
+                ],
+                correct: 1,
+                explanation: "Richiedere i permessi nel contesto appropriato, spiegando perché sono necessari, aiuta gli utenti a prendere decisioni informate."
+            },
+            {
+                question: "Come dovrebbe essere gestita la personalizzazione dell'interfaccia?",
+                options: [
+                    "Offrire infinite opzioni di personalizzazione",
+                    "Non permettere personalizzazioni",
+                    "Offrire opzioni di personalizzazione mirate che migliorano l'esperienza utente",
+                    "Nascondere le opzioni di personalizzazione"
+                ],
+                correct: 2,
+                explanation: "Le opzioni di personalizzazione dovrebbero essere significative e migliorare l'esperienza senza complicare l'interfaccia."
+            },
+            {
+                question: "Quale approccio è migliore per i tutorial in-app?",
+                options: [
+                    "Tutorial obbligatori e dettagliati",
+                    "Nessun tutorial",
+                    "Tutorial contestuali e opzionali che guidano l'utente quando necessario",
+                    "Video tutorial all'avvio"
+                ],
+                correct: 2,
+                explanation: "I tutorial contestuali permettono agli utenti di imparare mentre usano l'app, senza interrompere il loro flusso di lavoro."
+            },
+            {
+                question: "Come dovrebbe essere implementata la ricerca in un'app con molti contenuti?",
+                options: [
+                    "Un semplice campo di ricerca testuale",
+                    "Una ricerca avanzata con molti filtri",
+                    "Una ricerca intelligente con filtri contestuali e suggerimenti",
+                    "Nessuna funzione di ricerca"
+                ],
+                correct: 2,
+                explanation: "Una ricerca intelligente con suggerimenti aiuta gli utenti a trovare rapidamente ciò che cercano."
+            },
+            {
+                question: "Quale approccio è migliore per la gestione degli aggiornamenti dell'app?",
+                options: [
+                    "Aggiornamenti forzati immediati",
+                    "Nessuna notifica di aggiornamento",
+                    "Notifiche non intrusive con la possibilità di rimandare",
+                    "Aggiornamenti automatici nascosti"
+                ],
+                correct: 2,
+                explanation: "Gli aggiornamenti dovrebbero essere comunicati in modo non intrusivo, dando agli utenti il controllo su quando installarli."
+            },
+            {
+                question: "Come dovrebbe essere gestita la condivisione dei contenuti?",
+                options: [
+                    "Offrire tutte le possibili opzioni di condivisione",
+                    "Limitare la condivisione a poche opzioni",
+                    "Mostrare le opzioni più rilevanti per il contenuto e il contesto",
+                    "Nascondere le opzioni di condivisione in un menu"
+                ],
+                correct: 2,
+                explanation: "Le opzioni di condivisione dovrebbero essere contestuali e rilevanti per il tipo di contenuto."
+            },
+            {
+                question: "Quale approccio è migliore per il feedback aptico?",
+                options: [
+                    "Usare il feedback aptico per ogni interazione",
+                    "Non usare mai il feedback aptico",
+                    "Usare il feedback aptico in modo mirato per azioni significative",
+                    "Lasciare che l'utente configuri ogni feedback"
+                ],
+                correct: 2,
+                explanation: "Il feedback aptico dovrebbe essere usato in modo significativo per rafforzare azioni importanti."
+            },
+            {
+                question: "Come dovrebbe essere gestita la privacy dei dati utente?",
+                options: [
+                    "Raccogliere tutti i dati possibili",
+                    "Non raccogliere alcun dato",
+                    "Raccogliere solo i dati necessari e comunicarlo chiaramente",
+                    "Nascondere la raccolta dati"
+                ],
+                correct: 2,
+                explanation: "La trasparenza nella raccolta dati costruisce fiducia e rispetta la privacy degli utenti."
+            },
+            {
+                question: "Quale approccio è migliore per la gestione delle notifiche?",
+                options: [
+                    "Inviare notifiche frequenti per ogni evento",
+                    "Non inviare mai notifiche",
+                    "Inviare notifiche rilevanti e personalizzabili",
+                    "Lasciare tutte le notifiche nelle impostazioni"
+                ],
+                correct: 2,
+                explanation: "Le notifiche dovrebbero essere rilevanti e permettere agli utenti di controllarle."
+            },
+            {
+                question: "Come dovrebbe essere implementato il multitasking?",
+                options: [
+                    "Permettere sempre tutte le operazioni contemporaneamente",
+                    "Non supportare il multitasking",
+                    "Supportare il multitasking in modo contestuale e intuitivo",
+                    "Nascondere le funzionalità di multitasking"
+                ],
+                correct: 2,
+                explanation: "Il multitasking dovrebbe essere supportato quando ha senso per l'utente e l'app."
+            },
+            {
+                question: "Quale approccio è migliore per la gestione degli errori di rete?",
+                options: [
+                    "Mostrare un errore tecnico dettagliato",
+                    "Non mostrare alcun errore",
+                    "Mostrare un messaggio chiaro con possibili soluzioni",
+                    "Chiudere l'app in caso di errore"
+                ],
+                correct: 2,
+                explanation: "Gli errori dovrebbero essere comunicati in modo comprensibile e offrire soluzioni quando possibile."
+            },
+            {
+                question: "Come dovrebbe essere implementata la modalità offline?",
+                options: [
+                    "Non supportare l'uso offline",
+                    "Bloccare tutte le funzionalità offline",
+                    "Offrire funzionalità chiave offline con sincronizzazione intelligente",
+                    "Nascondere le funzionalità offline"
+                ],
+                correct: 2,
+                explanation: "La modalità offline dovrebbe mantenere le funzionalità essenziali e sincronizzare quando possibile."
+            },
+            {
+                question: "Quale approccio è migliore per i form lunghi?",
+                options: [
+                    "Mostrare tutti i campi in una singola schermata",
+                    "Dividere il form in step logici con indicatori di progresso",
+                    "Nascondere i campi opzionali",
+                    "Utilizzare solo campi obbligatori"
+                ],
+                correct: 1,
+                explanation: "Dividere i form lunghi in step logici riduce il carico cognitivo e migliora il completamento."
+            },
+            {
+                question: "Come dovrebbe essere gestita l'accessibilità per gli utenti con disabilità visive?",
+                options: [
+                    "Offrire un'app separata per l'accessibilità",
+                    "Ignorare l'accessibilità",
+                    "Integrare l'accessibilità in modo nativo con supporto per screen reader",
+                    "Limitare le funzionalità per semplificare l'accesso"
+                ],
+                correct: 2,
+                explanation: "L'accessibilità dovrebbe essere integrata nativamente nell'app per garantire un'esperienza inclusiva."
+            },
+            {
+                question: "Quale approccio è migliore per la gestione del testo in diverse lingue?",
+                options: [
+                    "Supportare solo la lingua principale",
+                    "Tradurre automaticamente tutto",
+                    "Supportare più lingue con localizzazione appropriata",
+                    "Usare icone invece del testo"
+                ],
+                correct: 2,
+                explanation: "La localizzazione dovrebbe rispettare le convenzioni linguistiche e culturali di ogni lingua."
+            },
+            {
+                question: "Come dovrebbe essere implementato il supporto per schermi di diverse dimensioni?",
+                options: [
+                    "Creare layout fissi",
+                    "Ignorare alcuni dispositivi",
+                    "Utilizzare layout adattivi e responsive",
+                    "Creare app separate per ogni dimensione"
+                ],
+                correct: 2,
+                explanation: "I layout adattivi garantiscono una buona esperienza su tutti i dispositivi."
+            },
+            {
+                question: "Quale approccio è migliore per la gestione dei dati sensibili?",
+                options: [
+                    "Salvare tutto localmente",
+                    "Salvare tutto nel cloud",
+                    "Utilizzare un approccio ibrido con crittografia appropriata",
+                    "Non salvare dati sensibili"
+                ],
+                correct: 2,
+                explanation: "La sicurezza dei dati dovrebbe bilanciare comodità e protezione."
+            },
+            {
+                question: "Come dovrebbe essere implementata la ricerca vocale?",
+                options: [
+                    "Come unica opzione di input",
+                    "Non implementarla",
+                    "Come opzione complementare con feedback chiaro",
+                    "Come funzione nascosta"
+                ],
+                correct: 2,
+                explanation: "La ricerca vocale dovrebbe essere un'opzione aggiuntiva con feedback chiaro sull'interpretazione."
+            },
+            {
+                question: "Quale approccio è migliore per la gestione delle gesture?",
+                options: [
+                    "Usare gesture complesse per tutte le azioni",
+                    "Non usare gesture",
+                    "Usare gesture standard e intuitive con alternative visibili",
+                    "Nascondere le funzionalità dietro gesture"
+                ],
+                correct: 2,
+                explanation: "Le gesture dovrebbero essere intuitive e avere alternative visibili per la scoperta."
+            },
+            {
+                question: "Come dovrebbe essere implementato il feedback sonoro?",
+                options: [
+                    "Usare suoni per ogni interazione",
+                    "Non usare suoni",
+                    "Usare suoni in modo mirato e rispettoso del contesto",
+                    "Lasciare i suoni nelle impostazioni"
+                ],
+                correct: 2,
+                explanation: "Il feedback sonoro dovrebbe essere contestuale e rispettare le preferenze di sistema."
+            },
+            {
+                question: "Quale approccio è migliore per la visualizzazione di dati complessi?",
+                options: [
+                    "Mostrare tutti i dati in tabelle",
+                    "Semplificare eccessivamente i dati",
+                    "Utilizzare visualizzazioni appropriate con livelli di dettaglio",
+                    "Nascondere i dati complessi"
+                ],
+                correct: 2,
+                explanation: "Le visualizzazioni dovrebbero rendere i dati comprensibili mantenendo la complessità necessaria."
+            },
+            {
+                question: "Come dovrebbe essere gestita la performance dell'app?",
+                options: [
+                    "Ottimizzare solo per dispositivi high-end",
+                    "Ignorare la performance",
+                    "Bilanciare performance e funzionalità per tutti i dispositivi",
+                    "Limitare le funzionalità per la performance"
+                ],
+                correct: 2,
+                explanation: "La performance dovrebbe essere ottimizzata per offrire una buona esperienza su tutti i dispositivi."
+            },
+            {
+                question: "Quale approccio è migliore per l'onboarding degli utenti?",
+                options: [
+                    "Tutorial lungo e dettagliato",
+                    "Nessun onboarding",
+                    "Onboarding progressivo e contestuale",
+                    "Video introduttivo obbligatorio"
+                ],
+                correct: 2,
+                explanation: "L'onboarding dovrebbe guidare gli utenti progressivamente attraverso le funzionalità chiave."
+            },
+            {
+                question: "Come dovrebbe essere implementata la ricerca avanzata?",
+                options: [
+                    "Mostrare tutti i filtri possibili",
+                    "Non offrire filtri",
+                    "Offrire filtri contestuali e rilevanti",
+                    "Nascondere i filtri avanzati"
+                ],
+                correct: 2,
+                explanation: "I filtri di ricerca dovrebbero essere pertinenti e facili da usare."
+            },
+            {
+                question: "Quale approccio è migliore per la gestione degli allegati?",
+                options: [
+                    "Permettere qualsiasi tipo di file",
+                    "Non permettere allegati",
+                    "Supportare formati comuni con limiti chiari",
+                    "Limitare a un solo tipo di file"
+                ],
+                correct: 2,
+                explanation: "La gestione degli allegati dovrebbe essere chiara e supportare i formati più comuni."
+            },
+            {
+                question: "Come dovrebbe essere implementato il supporto per Apple Pencil?",
+                options: [
+                    "Come unica opzione di input",
+                    "Non implementarlo",
+                    "Come opzione complementare con funzionalità dedicate",
+                    "Come funzione nascosta"
+                ],
+                correct: 2,
+                explanation: "Il supporto per Apple Pencil dovrebbe aggiungere valore quando appropriato."
+            },
+            {
+                question: "Quale approccio è migliore per la gestione della batteria?",
+                options: [
+                    "Ignorare il consumo della batteria",
+                    "Limitare tutte le funzionalità",
+                    "Ottimizzare il consumo con modalità di risparmio",
+                    "Disabilitare funzioni in background"
+                ],
+                correct: 2,
+                explanation: "L'ottimizzazione della batteria dovrebbe bilanciare funzionalità e durata."
+            },
+            {
+                question: "Come dovrebbe essere implementata la sincronizzazione dei dati?",
+                options: [
+                    "Sincronizzare continuamente tutto",
+                    "Non sincronizzare",
+                    "Sincronizzare in modo intelligente e configurabile",
+                    "Sincronizzare solo manualmente"
+                ],
+                correct: 2,
+                explanation: "La sincronizzazione dovrebbe essere efficiente e rispettare le preferenze dell'utente."
+            },
+            {
+                question: "Quale approccio è migliore per la gestione dei temi?",
+                options: [
+                    "Un solo tema fisso",
+                    "Infinite opzioni di personalizzazione",
+                    "Temi ben progettati che rispettano le linee guida",
+                    "Temi generati automaticamente"
+                ],
+                correct: 2,
+                explanation: "I temi dovrebbero mantenere coerenza e usabilità seguendo le linee guida."
+            },
+            {
+                question: "Come dovrebbe essere implementato il supporto per widget?",
+                options: [
+                    "Widget con tutte le funzionalità dell'app",
+                    "Nessun widget",
+                    "Widget focalizzati su informazioni e azioni chiave",
+                    "Widget puramente decorativi"
+                ],
+                correct: 2,
+                explanation: "I widget dovrebbero fornire informazioni utili e azioni rapide pertinenti."
+            },
+            {
+                question: "Quale approccio è migliore per la gestione degli errori di input?",
+                options: [
+                    "Bloccare l'input non valido",
+                    "Accettare qualsiasi input",
+                    "Validare e guidare verso input corretti",
+                    "Ignorare gli errori"
+                ],
+                correct: 2,
+                explanation: "La validazione dovrebbe aiutare gli utenti a inserire dati corretti."
+            },
+            {
+                question: "Come dovrebbe essere implementata la modalità landscape?",
+                options: [
+                    "Forzare l'orientamento portrait",
+                    "Ignorare l'orientamento landscape",
+                    "Adattare il layout in modo appropriato",
+                    "Creare un'interfaccia separata"
+                ],
+                correct: 2,
+                explanation: "Il supporto landscape dovrebbe offrire un'esperienza ottimizzata quando appropriato."
+            },
+            {
+                question: "Quale approccio è migliore per la gestione dei permessi della fotocamera?",
+                options: [
+                    "Richiedere accesso all'avvio",
+                    "Non usare la fotocamera",
+                    "Richiedere accesso quando necessario con spiegazione",
+                    "Nascondere le funzioni della fotocamera"
+                ],
+                correct: 2,
+                explanation: "I permessi della fotocamera dovrebbero essere richiesti nel contesto appropriato."
+            },
+            {
+                question: "Come dovrebbe essere implementato il supporto per le scorciatoie da tastiera?",
+                options: [
+                    "Nessuna scorciatoia",
+                    "Scorciatoie per tutto",
+                    "Scorciatoie intuitive per azioni comuni",
+                    "Scorciatoie personalizzabili"
+                ],
+                correct: 2,
+                explanation: "Le scorciatoie dovrebbero migliorare l'efficienza per gli utenti della tastiera."
+            },
+            {
+                question: "Quale approccio è migliore per la gestione del testo lungo?",
+                options: [
+                    "Mostrare tutto il testo",
+                    "Troncare sempre il testo",
+                    "Utilizzare tecniche appropriate di presentazione",
+                    "Nascondere il testo lungo"
+                ],
+                correct: 2,
+                explanation: "Il testo lungo dovrebbe essere presentato in modo leggibile e accessibile."
+            },
+            {
+                question: "Come dovrebbe essere implementata la ricerca in-app?",
+                options: [
+                    "Solo ricerca globale",
+                    "Nessuna ricerca",
+                    "Ricerca contestuale con filtri appropriati",
+                    "Ricerca solo per tag"
+                ],
+                correct: 2,
+                explanation: "La ricerca dovrebbe essere contestuale e aiutare gli utenti a trovare ciò che cercano."
+            },
+            {
+                question: "Quale approccio è migliore per la gestione delle animazioni?",
+                options: [
+                    "Animazioni elaborate ovunque",
+                    "Nessuna animazione",
+                    "Animazioni sottili e funzionali",
+                    "Animazioni casuali"
+                ],
+                correct: 2,
+                explanation: "Le animazioni dovrebbero migliorare la comprensione e il feedback."
+            },
+            {
+                question: "Come dovrebbe essere implementato il supporto per il drag and drop?",
+                options: [
+                    "Per ogni elemento",
+                    "Mai",
+                    "Quando migliora l'interazione",
+                    "Solo tra app"
+                ],
+                correct: 2,
+                explanation: "Il drag and drop dovrebbe essere implementato dove ha senso per l'utente."
+            },
+            {
+                question: "Quale approccio è migliore per la gestione dei contenuti dinamici?",
+                options: [
+                    "Aggiornare continuamente",
+                    "Contenuti statici",
+                    "Aggiornamenti intelligenti e configurabili",
+                    "Aggiornamenti manuali"
+                ],
+                correct: 2,
+                explanation: "Gli aggiornamenti dei contenuti dovrebbero bilanciare freschezza e prestazioni."
+            },
+            {
+                question: "Come dovrebbe essere implementata la condivisione tra app?",
+                options: [
+                    "Condividere tutto",
+                    "Nessuna condivisione",
+                    "Condivisione contestuale e sicura",
+                    "Condivisione limitata"
+                ],
+                correct: 2,
+                explanation: "La condivisione tra app dovrebbe essere sicura e appropriata al contesto."
+            },
+            {
+                question: "Quale approccio è migliore per il feedback degli utenti?",
+                options: [
+                    "Richiedere feedback continuo",
+                    "Non raccogliere feedback",
+                    "Offrire canali appropriati per il feedback",
+                    "Feedback solo tramite recensioni"
+                ],
+                correct: 2,
+                explanation: "Il feedback degli utenti dovrebbe essere facile da fornire quando desiderato."
+            },
+            {
+                question: "Come dovrebbe essere implementato il supporto per più finestre?",
+                options: [
+                    "Una sola finestra",
+                    "Infinite finestre",
+                    "Supporto appropriato al contesto",
+                    "Finestre solo per admin"
+                ],
+                correct: 2,
+                explanation: "Il supporto multi-finestra dovrebbe migliorare la produttività quando appropriato."
+            },
+            {
+                question: "Quale approccio è migliore per la gestione dei contenuti offline?",
+                options: [
+                    "Tutto disponibile offline",
+                    "Niente offline",
+                    "Contenuti chiave disponibili offline",
+                    "Solo cache temporanea"
+                ],
+                correct: 2,
+                explanation: "I contenuti offline dovrebbero essere gestiti in modo intelligente e utile."
+            },
+            {
+                question: "Come dovrebbe essere implementata l'integrazione con Siri?",
+                options: [
+                    "Nessuna integrazione",
+                    "Controllo totale via Siri",
+                    "Integrazione per azioni chiave",
+                    "Siri come unica interfaccia"
+                ],
+                correct: 2,
+                explanation: "L'integrazione con Siri dovrebbe fornire scorciatoie utili per le azioni principali."
             }
         ]
     }
@@ -900,4 +1483,109 @@ function checkAnswer(selectedIndex, correctIndex) {
         correct: correctIndex,
         isCorrect: isCorrect
     };
+}
+
+// Funzioni di disegno per Canvas
+function drawCircle(ctx, x, y, radius, color = '#000000') {
+    ctx.beginPath();
+    ctx.arc(x, y, radius, 0, Math.PI * 2);
+    ctx.fillStyle = color;
+    ctx.fill();
+    ctx.stroke();
+}
+
+function drawSquare(ctx, x, y, size, color = '#000000') {
+    ctx.fillStyle = color;
+    ctx.fillRect(x - size/2, y - size/2, size, size);
+    ctx.strokeRect(x - size/2, y - size/2, size, size);
+}
+
+function drawTriangle(ctx, x, y, size, color = '#000000') {
+    ctx.beginPath();
+    ctx.moveTo(x, y - size);
+    ctx.lineTo(x + size, y + size);
+    ctx.lineTo(x - size, y + size);
+    ctx.closePath();
+    ctx.fillStyle = color;
+    ctx.fill();
+    ctx.stroke();
+}
+
+function drawPolygon(ctx, x, y, radius, sides) {
+    ctx.beginPath();
+    for (let i = 0; i < sides; i++) {
+        const angle = (i * 2 * Math.PI / sides) - Math.PI / 2;
+        const px = x + Math.cos(angle) * radius;
+        const py = y + Math.sin(angle) * radius;
+        if (i === 0) {
+            ctx.moveTo(px, py);
+        } else {
+            ctx.lineTo(px, py);
+        }
+    }
+    ctx.closePath();
+    ctx.fillStyle = '#FFFFFF';
+    ctx.fill();
+    ctx.stroke();
+}
+
+function drawDice(ctx, x, y, size, number) {
+    // Disegna il dado
+    ctx.fillStyle = '#FFFFFF';
+    ctx.fillRect(x - size/2, y - size/2, size, size);
+    ctx.strokeRect(x - size/2, y - size/2, size, size);
+    
+    // Disegna i punti
+    const dotSize = size/8;
+    const positions = {
+        1: [[0, 0]],
+        2: [[-1, -1], [1, 1]],
+        3: [[-1, -1], [0, 0], [1, 1]],
+        4: [[-1, -1], [1, -1], [-1, 1], [1, 1]],
+        5: [[-1, -1], [1, -1], [0, 0], [-1, 1], [1, 1]],
+        6: [[-1, -1], [1, -1], [-1, 0], [1, 0], [-1, 1], [1, 1]]
+    };
+    
+    ctx.fillStyle = '#000000';
+    positions[number].forEach(pos => {
+        drawCircle(ctx, x + pos[0] * size/3, y + pos[1] * size/3, dotSize);
+    });
+}
+
+function drawDomino(ctx, x, y, size, top, bottom) {
+    const width = size;
+    const height = size * 2;
+    
+    // Disegna il domino
+    ctx.fillStyle = '#FFFFFF';
+    ctx.fillRect(x - width/2, y - height/2, width, height);
+    ctx.strokeRect(x - width/2, y - height/2, width, height);
+    
+    // Linea divisoria
+    ctx.beginPath();
+    ctx.moveTo(x - width/2, y);
+    ctx.lineTo(x + width/2, y);
+    ctx.stroke();
+    
+    // Disegna i punti
+    const dotSize = size/8;
+    const positions = {
+        0: [],
+        1: [[0, 0]],
+        2: [[-1, -1], [1, 1]],
+        3: [[-1, -1], [0, 0], [1, 1]],
+        4: [[-1, -1], [1, -1], [-1, 1], [1, 1]],
+        5: [[-1, -1], [1, -1], [0, 0], [-1, 1], [1, 1]],
+        6: [[-1, -1], [1, -1], [-1, 0], [1, 0], [-1, 1], [1, 1]]
+    };
+    
+    ctx.fillStyle = '#000000';
+    // Punti superiori
+    positions[top].forEach(pos => {
+        drawCircle(ctx, x + pos[0] * size/3, y - height/4 + pos[1] * size/3, dotSize);
+    });
+    // Punti inferiori
+    positions[bottom].forEach(pos => {
+        drawCircle(ctx, x + pos[0] * size/3, y + height/4 + pos[1] * size/3, dotSize);
+    });
 } 
