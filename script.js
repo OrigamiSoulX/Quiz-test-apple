@@ -551,20 +551,29 @@ function getNextBatchOfQuestions() {
 // Display question function
 function displayQuestion() {
     const currentQuestion = quizData[currentCategory].questions[currentQuestionIndex];
-    const shuffledOptions = shuffleArray([...currentQuestion.options]);
-    const correctIndex = shuffledOptions.indexOf(currentQuestion.options[currentQuestion.correct]);
     
-    document.getElementById('question-text').textContent = currentQuestion.question;
-    const optionsContainer = document.getElementById('options-container');
+    // Randomizza le opzioni
+    const originalOptions = [...currentQuestion.options];
+    const shuffledOptions = shuffleArray(originalOptions);
+    
+    // Trova il nuovo indice della risposta corretta
+    const correctIndex = shuffledOptions.indexOf(originalOptions[currentQuestion.correct]);
+    
+    questionText.textContent = currentQuestion.question;
     optionsContainer.innerHTML = '';
     
     shuffledOptions.forEach((option, index) => {
         const button = document.createElement('button');
-        button.className = 'option-button';
+        button.className = 'option';
         button.textContent = option;
         button.onclick = () => checkAnswer(index, correctIndex);
         optionsContainer.appendChild(button);
     });
+    
+    // Nascondi il feedback
+    feedbackContainer.style.display = 'none';
+    feedbackText.textContent = '';
+    explanationText.textContent = '';
     
     updateNavigationButtons();
 }
@@ -843,38 +852,49 @@ function updateNavigationButtons() {
 
 // Funzione per controllare la risposta
 function checkAnswer(selectedIndex, correctIndex) {
-    const options = document.querySelectorAll('.option-button');
-    const feedbackContainer = document.getElementById('feedback-container');
-    const feedbackText = document.getElementById('feedback-text');
-    const explanationText = document.getElementById('explanation-text');
+    const options = document.querySelectorAll('.option');
     
     // Disabilita tutti i pulsanti
     options.forEach(button => button.disabled = true);
     
-    // Aggiungi le classi appropriate
-    options.forEach((button, index) => {
-        if (index === correctIndex) {
-            button.classList.add('correct');
-        } else if (index === selectedIndex) {
-            button.classList.add('wrong');
-        }
+    // Rimuovi le classi precedenti
+    options.forEach(button => {
+        button.classList.remove('correct', 'wrong', 'selected');
     });
+    
+    // Aggiungi le classi appropriate con un leggero ritardo per l'animazione
+    setTimeout(() => {
+        options.forEach((button, index) => {
+            if (index === correctIndex) {
+                button.classList.add('correct');
+            }
+            if (index === selectedIndex && selectedIndex !== correctIndex) {
+                button.classList.add('wrong');
+            }
+            if (index === selectedIndex) {
+                button.classList.add('selected');
+            }
+        });
+    }, 100);
     
     // Mostra il feedback
     const isCorrect = selectedIndex === correctIndex;
-    if (feedbackContainer && feedbackText && explanationText) {
-        feedbackContainer.style.display = 'block';
-        feedbackText.textContent = isCorrect ? 'Correct!' : 'Wrong!';
-        feedbackText.className = isCorrect ? 'text-success' : 'text-danger';
-        explanationText.textContent = quizData[currentCategory].questions[currentQuestionIndex].explanation;
-    }
+    feedbackContainer.style.display = 'block';
+    feedbackText.textContent = isCorrect ? 'Corretto!' : 'Sbagliato!';
+    feedbackText.className = isCorrect ? 'text-success' : 'text-danger';
+    explanationText.textContent = quizData[currentCategory].questions[currentQuestionIndex].explanation;
     
-    // Aggiorna il punteggio
+    // Anima il container del feedback
+    feedbackContainer.style.opacity = '0';
+    setTimeout(() => {
+        feedbackContainer.style.opacity = '1';
+    }, 100);
+    
+    // Aggiorna il punteggio e salva la risposta
     if (isCorrect) {
         score++;
     }
     
-    // Salva la risposta dell'utente
     userAnswers[currentQuestionIndex] = {
         selected: selectedIndex,
         correct: correctIndex,
