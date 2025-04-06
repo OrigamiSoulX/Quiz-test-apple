@@ -6,111 +6,111 @@ const quizData = {
             {
                 question: "What is encapsulation in OOP?",
                 options: [
-                    "Bundling data and methods that operate on that data",
                     "Creating multiple instances of a class",
+                    "Bundling data and methods that operate on that data",
                     "Inheriting properties from a parent class",
                     "Overriding methods in a subclass"
                 ],
-                correct: 0,
+                correct: 1,
                 explanation: "Encapsulation is the bundling of data and methods that operate on that data into a single unit, typically a class."
             },
             {
                 question: "What is inheritance in OOP?",
                 options: [
-                    "A mechanism to create new classes from existing ones",
                     "A way to hide implementation details",
                     "A method to create multiple instances",
+                    "A mechanism to create new classes from existing ones",
                     "A technique to override methods"
                 ],
-                correct: 0,
+                correct: 2,
                 explanation: "Inheritance allows a class to inherit properties and methods from another class, promoting code reuse."
             },
             {
                 question: "What is polymorphism in OOP?",
                 options: [
-                    "The ability to take many forms",
                     "The process of hiding data",
                     "The creation of multiple instances",
-                    "The bundling of data and methods"
+                    "The bundling of data and methods",
+                    "The ability to take many forms"
                 ],
-                correct: 0,
+                correct: 3,
                 explanation: "Polymorphism allows objects of different classes to be treated as objects of a common superclass."
             },
             {
                 question: "What is abstraction in OOP?",
                 options: [
-                    "Hiding complex implementation details",
                     "Creating multiple instances",
+                    "Hiding complex implementation details",
                     "Inheriting properties",
                     "Overriding methods"
                 ],
-                correct: 0,
+                correct: 1,
                 explanation: "Abstraction focuses on hiding complex implementation details and showing only the essential features."
             },
             {
                 question: "What is a class in OOP?",
                 options: [
-                    "A blueprint for creating objects",
                     "A method to hide data",
                     "A way to create instances",
+                    "A blueprint for creating objects",
                     "A technique to override methods"
                 ],
-                correct: 0,
+                correct: 2,
                 explanation: "A class is a blueprint or template for creating objects, defining their properties and behaviors."
             },
             {
                 question: "What is an object in OOP?",
                 options: [
-                    "An instance of a class",
                     "A method to hide data",
+                    "An instance of a class",
                     "A way to create classes",
                     "A technique to override methods"
                 ],
-                correct: 0,
+                correct: 1,
                 explanation: "An object is an instance of a class, created from the class blueprint."
             },
             {
                 question: "What is a method in OOP?",
                 options: [
-                    "A function defined within a class",
                     "A way to hide data",
                     "A technique to create instances",
-                    "A process to override methods"
+                    "A process to override methods",
+                    "A function defined within a class"
                 ],
-                correct: 0,
+                correct: 3,
                 explanation: "A method is a function defined within a class that operates on the class's data."
             },
             {
                 question: "What is a constructor in OOP?",
                 options: [
-                    "A special method to initialize objects",
                     "A way to hide data",
+                    "A special method to initialize objects",
                     "A technique to create classes",
                     "A process to override methods"
                 ],
-                correct: 0,
+                correct: 1,
                 explanation: "A constructor is a special method used to initialize objects when they are created."
             },
             {
                 question: "What is method overriding in OOP?",
                 options: [
-                    "Providing a new implementation of a method in a subclass",
                     "Hiding data in a class",
                     "Creating multiple instances",
+                    "Providing a new implementation of a method in a subclass",
                     "Bundling data and methods"
                 ],
-                correct: 0,
+                correct: 2,
                 explanation: "Method overriding allows a subclass to provide a specific implementation of a method that is already defined in its parent class."
             },
             {
                 question: "What is method overloading in OOP?",
                 options: [
-                    "Creating multiple methods with the same name but different parameters",
                     "Hiding data in a class",
+                    "Creating multiple methods with the same name but different parameters",
                     "Creating multiple instances",
                     "Bundling data and methods"
                 ],
-                correct: 0,
+                correct: 1,
                 explanation: "Method overloading allows multiple methods to have the same name but different parameters."
             }
         ]
@@ -121,78 +121,78 @@ const quizData = {
             {
                 question: "What is the next number in the sequence: 2, 4, 8, 16, ...?",
                 options: [
-                    "32",
                     "24",
+                    "32",
                     "20",
                     "28"
                 ],
-                correct: 0,
+                correct: 1,
                 explanation: "Each number is multiplied by 2 to get the next number in the sequence."
             },
             {
                 question: "What is the probability of rolling a 6 on a standard die?",
                 options: [
-                    "1/6",
                     "1/3",
                     "1/2",
+                    "1/6",
                     "1/4"
                 ],
-                correct: 0,
+                correct: 2,
                 explanation: "A standard die has 6 faces, so the probability of rolling any specific number is 1 out of 6."
             },
             {
                 question: "Complete the sequence: A, C, E, G, ...",
                 options: [
-                    "I",
                     "H",
                     "F",
-                    "J"
+                    "J",
+                    "I"
                 ],
-                correct: 0,
+                correct: 3,
                 explanation: "The sequence follows the pattern of skipping one letter in the alphabet (A, skip B, C, skip D, etc.)."
             },
             {
                 question: "What is the next number in the sequence: 1, 1, 2, 3, 5, 8, ...?",
                 options: [
-                    "13",
                     "10",
                     "11",
+                    "13",
                     "12"
                 ],
-                correct: 0,
+                correct: 2,
                 explanation: "This is the Fibonacci sequence where each number is the sum of the two preceding ones."
             },
             {
                 question: "If it takes 5 machines 5 minutes to make 5 widgets, how long would it take 100 machines to make 100 widgets?",
                 options: [
-                    "5 minutes",
                     "100 minutes",
+                    "5 minutes",
                     "20 minutes",
                     "1 minute"
                 ],
-                correct: 0,
+                correct: 1,
                 explanation: "Each machine takes 5 minutes to make one widget, so 100 machines would take the same 5 minutes to make 100 widgets."
             },
             {
                 question: "How many fingers are there on 10 hands?",
                 options: [
-                    "50",
                     "100",
                     "20",
+                    "50",
                     "10"
                 ],
-                correct: 0,
+                correct: 2,
                 explanation: "Each hand has 5 fingers, so 10 hands would have 50 fingers in total."
             },
             {
                 question: "What is the next number in the sequence: 1, 4, 9, 16, 25, ...?",
                 options: [
-                    "36",
                     "30",
+                    "36",
                     "32",
                     "28"
                 ],
-                correct: 0,
+                correct: 1,
                 explanation: "This sequence represents perfect squares (1², 2², 3², 4², 5², ...)."
             }
         ]
@@ -810,15 +810,25 @@ function shuffleArray(array) {
 
 function showQuestion() {
     const currentQuestion = quizData[currentCategory].questions[currentQuestionIndex];
-    const shuffledOptions = shuffleArray(currentQuestion.options);
-    const correctAnswerIndex = shuffledOptions.indexOf(currentQuestion.options[currentQuestion.correct]);
+    
+    // Crea un array di oggetti che contiene sia l'opzione che il suo indice originale
+    const optionsWithIndices = currentQuestion.options.map((option, index) => ({
+        text: option,
+        isCorrect: index === currentQuestion.correct
+    }));
+    
+    // Mescola l'array delle opzioni
+    const shuffledOptions = shuffleArray(optionsWithIndices);
+    
+    // Trova il nuovo indice della risposta corretta
+    const correctAnswerIndex = shuffledOptions.findIndex(option => option.isCorrect);
     
     questionText.textContent = currentQuestion.question;
     
     optionsContainer.innerHTML = '';
     shuffledOptions.forEach((option, index) => {
         const button = document.createElement('button');
-        button.textContent = option;
+        button.textContent = option.text;
         button.classList.add('option');
         button.addEventListener('click', () => checkAnswer(index, correctAnswerIndex));
         optionsContainer.appendChild(button);
