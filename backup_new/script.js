@@ -438,13 +438,6 @@ let currentBatch = 1;
 const QUESTIONS_PER_BATCH = 10;
 const TOTAL_QUESTIONS = 50;
 const answeredQuestions = new Set();
-let score = 0;
-let startTime;
-let batchStartTime;
-let totalTime = 0;
-let timerInterval;
-let timerSeconds = 0;
-let isTimerRunning = false;
 
 // DOM Elements
 const homeScreen = document.getElementById('home-screen');
@@ -490,17 +483,6 @@ document.addEventListener('DOMContentLoaded', () => {
     nextButton.addEventListener('click', showNextQuestion);
     endButton.addEventListener('click', endQuiz);
     continueButton.addEventListener('click', continueQuiz);
-
-    const startButton = document.getElementById('start-timer');
-    const stopButton = document.getElementById('stop-timer');
-    const resetButton = document.getElementById('reset-timer');
-
-    startButton.addEventListener('click', startTimer);
-    stopButton.addEventListener('click', stopTimer);
-    resetButton.addEventListener('click', resetTimer);
-
-    // Disabilita il pulsante stop all'inizio
-    stopButton.disabled = true;
 });
 
 // Start quiz function
@@ -511,8 +493,6 @@ function startQuiz(category) {
     questionOrder = [];
     answeredQuestions.clear();
     currentBatch = 1;
-    startTime = Date.now();
-    batchStartTime = startTime;
 
     // Get first batch of questions
     const questions = getNextBatchOfQuestions();
@@ -579,7 +559,6 @@ function displayQuestion() {
     prevButton.disabled = currentQuestionIndex === 0;
     nextButton.textContent = currentQuestionIndex === questionOrder.length - 1 ? 'Finish Quiz' : 'Next';
     nextButton.className = currentQuestionIndex === questionOrder.length - 1 ? 'btn btn-primary' : 'btn btn-secondary';
-    updateTimer();
 }
 
 // Select option function
@@ -682,20 +661,16 @@ function showResults() {
 
 // End quiz function
 function endQuiz() {
-    const totalMinutes = Math.floor(totalTime / 60);
-    const totalSeconds = totalTime % 60;
-    
-    const summary = document.createElement('div');
-    summary.className = 'summary';
-    summary.innerHTML = `
-        <h2>Riepilogo Finale</h2>
-        <p>Tempo totale impiegato: ${totalMinutes}:${totalSeconds.toString().padStart(2, '0')}</p>
-        <p>Punteggio finale: ${score} su ${currentQuiz.questions.length}</p>
-        <button onclick="showHomeScreen()">Torna alla Home</button>
-    `;
-    
-    document.getElementById('quiz-container').innerHTML = '';
-    document.getElementById('quiz-container').appendChild(summary);
+    if (confirm('Are you sure you want to end the quiz?')) {
+        currentCategory = null;
+        currentQuestionIndex = 0;
+        userAnswers = [];
+        questionOrder = [];
+        answeredQuestions.clear();
+        currentBatch = 1;
+        quizScreen.classList.remove('active');
+        homeScreen.classList.add('active');
+    }
 }
 
 // Continue quiz function
@@ -723,47 +698,4 @@ function continueQuiz() {
         resultsScreen.classList.remove('active');
         homeScreen.classList.add('active');
     }
-}
-
-function updateTimer() {
-    const currentTime = Date.now();
-    const elapsedTime = Math.floor((currentTime - batchStartTime) / 1000);
-    const minutes = Math.floor(elapsedTime / 60);
-    const seconds = elapsedTime % 60;
-    document.getElementById('timer').textContent = `Tempo: ${minutes}:${seconds.toString().padStart(2, '0')}`;
-}
-
-function startTimer() {
-    if (!isTimerRunning) {
-        isTimerRunning = true;
-        timerInterval = setInterval(updateTimer, 1000);
-        document.getElementById('start-timer').disabled = true;
-        document.getElementById('stop-timer').disabled = false;
-    }
-}
-
-function stopTimer() {
-    if (isTimerRunning) {
-        isTimerRunning = false;
-        clearInterval(timerInterval);
-        document.getElementById('start-timer').disabled = false;
-        document.getElementById('stop-timer').disabled = true;
-    }
-}
-
-function resetTimer() {
-    stopTimer();
-    timerSeconds = 0;
-    updateTimerDisplay();
-    document.getElementById('start-timer').disabled = false;
-    document.getElementById('stop-timer').disabled = true;
-}
-
-function updateTimerDisplay() {
-    const hours = Math.floor(timerSeconds / 3600);
-    const minutes = Math.floor((timerSeconds % 3600) / 60);
-    const seconds = timerSeconds % 60;
-    
-    const display = `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
-    document.getElementById('timer').textContent = display;
 } 
