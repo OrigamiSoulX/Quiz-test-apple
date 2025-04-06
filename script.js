@@ -551,35 +551,22 @@ function getNextBatchOfQuestions() {
 // Display question function
 function displayQuestion() {
     const currentQuestion = quizData[currentCategory].questions[currentQuestionIndex];
+    const shuffledOptions = shuffleArray([...currentQuestion.options]);
+    const correctIndex = shuffledOptions.indexOf(currentQuestion.options[currentQuestion.correct]);
     
-    // Crea un array di oggetti che contiene sia l'opzione che il suo indice originale
-    const optionsWithIndices = currentQuestion.options.map((option, index) => ({
-        text: option,
-        isCorrect: index === currentQuestion.correct
-    }));
-    
-    // Mescola l'array delle opzioni
-    const shuffledOptions = shuffleArray(optionsWithIndices);
-    
-    // Trova il nuovo indice della risposta corretta
-    const correctAnswerIndex = shuffledOptions.findIndex(option => option.isCorrect);
-    
-    questionText.textContent = currentQuestion.question;
-    
+    document.getElementById('question-text').textContent = currentQuestion.question;
+    const optionsContainer = document.getElementById('options-container');
     optionsContainer.innerHTML = '';
+    
     shuffledOptions.forEach((option, index) => {
         const button = document.createElement('button');
-        button.textContent = option.text;
-        button.classList.add('option');
-        button.addEventListener('click', () => selectOption(index, correctAnswerIndex));
+        button.className = 'option-button';
+        button.textContent = option;
+        button.onclick = () => checkAnswer(index, correctIndex);
         optionsContainer.appendChild(button);
     });
-
-    // Update navigation buttons
-    prevButton.disabled = currentQuestionIndex === 0;
-    nextButton.textContent = currentQuestionIndex === questionOrder.length - 1 ? 'Finish Quiz' : 'Next';
-    nextButton.className = currentQuestionIndex === questionOrder.length - 1 ? 'btn btn-primary' : 'btn btn-secondary';
-    updateTimer();
+    
+    updateNavigationButtons();
 }
 
 function selectOption(selectedIndex, correctIndex) {
@@ -832,4 +819,65 @@ function playSound(sound) {
 
 function updateProgress() {
     // Implementation of updateProgress function
+}
+
+// Funzione per aggiornare i pulsanti di navigazione
+function updateNavigationButtons() {
+    const prevButton = document.getElementById('prev-button');
+    const nextButton = document.getElementById('next-button');
+    const endButton = document.getElementById('end-button');
+
+    if (prevButton) {
+        prevButton.disabled = currentQuestionIndex === 0;
+    }
+
+    if (nextButton) {
+        nextButton.textContent = currentQuestionIndex === quizData[currentCategory].questions.length - 1 ? 'Finish Quiz' : 'Next';
+        nextButton.className = currentQuestionIndex === quizData[currentCategory].questions.length - 1 ? 'btn btn-primary' : 'btn btn-secondary';
+    }
+
+    if (endButton) {
+        endButton.style.display = currentQuestionIndex > 0 ? 'block' : 'none';
+    }
+}
+
+// Funzione per controllare la risposta
+function checkAnswer(selectedIndex, correctIndex) {
+    const options = document.querySelectorAll('.option-button');
+    const feedbackContainer = document.getElementById('feedback-container');
+    const feedbackText = document.getElementById('feedback-text');
+    const explanationText = document.getElementById('explanation-text');
+    
+    // Disabilita tutti i pulsanti
+    options.forEach(button => button.disabled = true);
+    
+    // Aggiungi le classi appropriate
+    options.forEach((button, index) => {
+        if (index === correctIndex) {
+            button.classList.add('correct');
+        } else if (index === selectedIndex) {
+            button.classList.add('wrong');
+        }
+    });
+    
+    // Mostra il feedback
+    const isCorrect = selectedIndex === correctIndex;
+    if (feedbackContainer && feedbackText && explanationText) {
+        feedbackContainer.style.display = 'block';
+        feedbackText.textContent = isCorrect ? 'Correct!' : 'Wrong!';
+        feedbackText.className = isCorrect ? 'text-success' : 'text-danger';
+        explanationText.textContent = quizData[currentCategory].questions[currentQuestionIndex].explanation;
+    }
+    
+    // Aggiorna il punteggio
+    if (isCorrect) {
+        score++;
+    }
+    
+    // Salva la risposta dell'utente
+    userAnswers[currentQuestionIndex] = {
+        selected: selectedIndex,
+        correct: correctIndex,
+        isCorrect: isCorrect
+    };
 } 
