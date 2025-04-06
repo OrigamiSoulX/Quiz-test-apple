@@ -316,114 +316,114 @@ const quizData = {
         title: "Apple Human Interface Guidelines Quiz",
         questions: [
             {
-                question: "What is the minimum recommended size for a touch target in iOS?",
+                question: "Qual è lo scopo principale delle Apple Human Interface Guidelines?",
                 options: [
-                    "44x44 points",
-                    "30x30 points",
-                    "20x20 points",
-                    "50x50 points"
+                    "Fornire linee guida per lo sviluppo hardware",
+                    "Offrire raccomandazioni per progettare esperienze utente coerenti su tutte le piattaforme Apple",
+                    "Definire standard di codifica per le applicazioni Apple",
+                    "Stabilire politiche di marketing per le app"
                 ],
-                correct: 0,
-                explanation: "Apple recommends a minimum size of 44x44 points for touch targets to ensure elements are easily tappable."
+                correct: 1,
+                explanation: "Le HIG forniscono indicazioni per creare interfacce utente intuitive e coerenti su macOS, iOS, watchOS, tvOS e altre piattaforme Apple."
             },
             {
-                question: "What is the minimum recommended contrast ratio for text in iOS?",
+                question: "Quale tra i seguenti è un principio chiave delle HIG di Apple?",
                 options: [
-                    "4.5:1",
-                    "3:1",
-                    "2:1",
-                    "5:1"
+                    "Personalizzazione estrema",
+                    "Coerenza",
+                    "Sovraccarico di funzionalità",
+                    "Design complesso"
                 ],
-                correct: 0,
-                explanation: "Apple recommends a minimum contrast ratio of 4.5:1 between text and background to ensure readability."
+                correct: 1,
+                explanation: "La coerenza assicura che le applicazioni si comportino in modo prevedibile, facilitando l'apprendimento e l'uso da parte degli utenti."
             },
             {
-                question: "What is the minimum recommended text size for readability?",
+                question: "Secondo le HIG, come dovrebbero essere utilizzati i colori nelle applicazioni?",
                 options: [
-                    "11 points",
-                    "9 points",
-                    "7 points",
-                    "13 points"
+                    "Utilizzare colori vivaci per tutti gli elementi",
+                    "Evitare l'uso del colore per indicare lo stato",
+                    "Usare i colori di sistema per garantire leggibilità e coerenza",
+                    "Utilizzare solo colori monocromatici"
                 ],
-                correct: 0,
-                explanation: "Apple recommends a minimum text size of 11 points to ensure readability across all devices."
+                correct: 2,
+                explanation: "I colori di sistema si adattano automaticamente a diverse modalità e impostazioni di accessibilità, migliorando l'esperienza utente."
             },
             {
-                question: "What is the minimum recommended margin between interactive elements?",
+                question: "Qual è la funzione principale dei pulsanti secondo le HIG?",
                 options: [
-                    "8 points",
-                    "4 points",
-                    "12 points",
-                    "16 points"
+                    "Visualizzare informazioni",
+                    "Iniziare un'azione o confermare una decisione",
+                    "Navigare tra diverse sezioni",
+                    "Decorare l'interfaccia"
                 ],
-                correct: 0,
-                explanation: "Apple recommends a minimum margin of 8 points between interactive elements to prevent accidental taps."
+                correct: 1,
+                explanation: "I pulsanti sono elementi interattivi che consentono agli utenti di eseguire azioni specifiche nell'app."
             },
             {
-                question: "What is the standard color for links in iOS?",
+                question: "Secondo le HIG, come dovrebbero essere progettate le icone delle app?",
                 options: [
-                    "Blue",
-                    "Red",
-                    "Green",
-                    "Black"
+                    "Dettagliate e complesse",
+                    "Semplici, riconoscibili e in linea con il design dell'app",
+                    "Utilizzando solo colori neutri",
+                    "Simili alle icone di altre app"
                 ],
-                correct: 0,
-                explanation: "The standard color for links in iOS is blue, which is universally recognized as an indicator of interactivity."
+                correct: 1,
+                explanation: "Le icone dovrebbero essere distintive e riflettere lo stile e la funzionalità dell'app, mantenendo semplicità e riconoscibilità."
             },
             {
-                question: "What is the recommended duration for animations in iOS?",
+                question: "Qual è l'obiettivo principale dell'accessibilità nelle HIG di Apple?",
                 options: [
-                    "0.3 seconds",
-                    "0.5 seconds",
-                    "0.1 seconds",
-                    "1 second"
+                    "Limitare l'uso dell'app a utenti specifici",
+                    "Garantire che tutte le persone possano utilizzare l'app",
+                    "Aggiungere funzionalità avanzate per utenti esperti",
+                    "Migliorare le prestazioni dell'app"
                 ],
-                correct: 0,
-                explanation: "Apple recommends a duration of 0.3 seconds for animations, which is long enough to be noticed but not so long that it slows down interaction."
+                correct: 1,
+                explanation: "L'accessibilità assicura che l'app sia utilizzabile da persone con diverse esigenze e capacità, rendendo l'esperienza inclusiva per tutti."
             },
             {
-                question: "What is the standard corner radius for buttons in iOS?",
+                question: "Come dovrebbero essere gestite le notifiche secondo le HIG?",
                 options: [
-                    "8 points",
-                    "4 points",
-                    "12 points",
-                    "16 points"
+                    "Inviare notifiche frequenti per mantenere l'utente coinvolto",
+                    "Utilizzare notifiche solo per informazioni importanti e pertinenti",
+                    "Personalizzare le notifiche con suoni unici",
+                    "Inviare notifiche in orari casuali"
                 ],
-                correct: 0,
-                explanation: "Apple recommends a corner radius of 8 points for buttons, which provides a modern and consistent look."
+                correct: 1,
+                explanation: "Le notifiche dovrebbero essere utilizzate con moderazione e solo per informazioni veramente importanti e rilevanti per l'utente."
             },
             {
-                question: "What is the minimum recommended thickness for lines in iOS?",
+                question: "Quale approccio al design è preferito nelle HIG?",
                 options: [
-                    "1 point",
-                    "0.5 points",
-                    "2 points",
-                    "1.5 points"
+                    "Design minimalista e intuitivo",
+                    "Design complesso e dettagliato",
+                    "Design basato su tendenze temporanee",
+                    "Design che privilegia l'estetica sulla funzionalità"
                 ],
                 correct: 0,
-                explanation: "Apple recommends a minimum thickness of 1 point for lines to ensure visibility across all devices."
+                explanation: "Apple privilegia un design minimalista e intuitivo che facilita l'uso dell'app senza sacrificare la funzionalità."
             },
             {
-                question: "What is the minimum recommended size for icons in iOS?",
+                question: "Come dovrebbe essere gestito il feedback utente secondo le HIG?",
                 options: [
-                    "24x24 points",
-                    "20x20 points",
-                    "16x16 points",
-                    "28x28 points"
+                    "Fornire feedback solo in caso di errori",
+                    "Ignorare il feedback per non disturbare l'utente",
+                    "Fornire feedback immediato e chiaro per ogni azione",
+                    "Raccogliere feedback solo attraverso recensioni"
                 ],
-                correct: 0,
-                explanation: "Apple recommends a minimum size of 24x24 points for icons to ensure recognizability."
+                correct: 2,
+                explanation: "Il feedback immediato e chiaro aiuta gli utenti a capire che le loro azioni sono state registrate e processate dal sistema."
             },
             {
-                question: "What is the minimum recommended padding for text in iOS?",
+                question: "Quale principio guida la navigazione nelle app secondo le HIG?",
                 options: [
-                    "16 points",
-                    "8 points",
-                    "12 points",
-                    "20 points"
+                    "Creare percorsi di navigazione complessi",
+                    "Mantenere la navigazione semplice e intuitiva",
+                    "Nascondere le opzioni di navigazione",
+                    "Cambiare frequentemente la struttura di navigazione"
                 ],
-                correct: 0,
-                explanation: "Apple recommends a minimum padding of 16 points for text to ensure comfortable spacing."
+                correct: 1,
+                explanation: "Una navigazione semplice e intuitiva permette agli utenti di orientarsi facilmente nell'app e trovare ciò che cercano."
             }
         ]
     }
