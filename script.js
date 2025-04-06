@@ -682,20 +682,51 @@ function showResults() {
 
 // End quiz function
 function endQuiz() {
-    const totalMinutes = Math.floor(totalTime / 60);
-    const totalSeconds = totalTime % 60;
+    // Ferma il timer
+    stopTimer();
     
-    const summary = document.createElement('div');
-    summary.className = 'summary';
-    summary.innerHTML = `
-        <h2>Riepilogo Finale</h2>
-        <p>Tempo totale impiegato: ${totalMinutes}:${totalSeconds.toString().padStart(2, '0')}</p>
-        <p>Punteggio finale: ${score} su ${currentQuiz.questions.length}</p>
-        <button onclick="showHomeScreen()">Torna alla Home</button>
+    // Prepara il sommario delle risposte
+    let summary = '<div class="summary">';
+    summary += '<h2>Sommario del Quiz</h2>';
+    summary += `<p>Hai completato ${currentQuestionIndex + 1} domande su ${questionOrder.length}</p>`;
+    summary += `<p>Punteggio: ${score} su ${currentQuestionIndex + 1}</p>`;
+    summary += `<p>Tempo impiegato: ${formatTime(timerSeconds)}</p>`;
+    summary += '<h3>Le tue risposte:</h3>';
+    
+    // Aggiungi ogni domanda e risposta al sommario
+    for (let i = 0; i <= currentQuestionIndex; i++) {
+        const question = questionOrder[i];
+        const userAnswer = userAnswers[i];
+        const isCorrect = userAnswer === question.correct;
+        
+        summary += `
+            <div class="question-summary ${isCorrect ? 'correct' : 'incorrect'}">
+                <p><strong>Domanda ${i + 1}:</strong> ${question.question}</p>
+                <p>La tua risposta: ${question.options[userAnswer]}</p>
+                <p>Risposta corretta: ${question.options[question.correct]}</p>
+                <p>Spiegazione: ${question.explanation}</p>
+            </div>
+        `;
+    }
+    
+    // Aggiungi pulsanti per tornare alla home o continuare
+    summary += `
+        <div class="summary-buttons">
+            <button onclick="window.location.reload()" class="btn btn-primary">Torna alla Home</button>
+            <button onclick="continueQuiz()" class="btn btn-success">Continua il Quiz</button>
+        </div>
     `;
+    summary += '</div>';
     
-    document.getElementById('quiz-container').innerHTML = '';
-    document.getElementById('quiz-container').appendChild(summary);
+    // Mostra il sommario
+    document.querySelector('.quiz-container').innerHTML = summary;
+}
+
+function formatTime(seconds) {
+    const hours = Math.floor(seconds / 3600);
+    const minutes = Math.floor((seconds % 3600) / 60);
+    const secs = seconds % 60;
+    return `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
 }
 
 // Continue quiz function
@@ -766,4 +797,62 @@ function updateTimerDisplay() {
     
     const display = `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
     document.getElementById('timer').textContent = display;
+}
+
+function shuffleArray(array) {
+    const newArray = [...array];
+    for (let i = newArray.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
+    }
+    return newArray;
+}
+
+function showQuestion() {
+    const question = currentQuestions[currentQuestionIndex];
+    const shuffledOptions = shuffleArray(question.options);
+    const correctAnswerIndex = shuffledOptions.indexOf(question.options[question.correct]);
+    
+    document.getElementById('question').textContent = question.question;
+    const optionsContainer = document.getElementById('options');
+    optionsContainer.innerHTML = '';
+    
+    shuffledOptions.forEach((option, index) => {
+        const button = document.createElement('button');
+        button.textContent = option;
+        button.onclick = () => checkAnswer(index, correctAnswerIndex);
+        optionsContainer.appendChild(button);
+    });
+    
+    updateProgress();
+}
+
+function checkAnswer(selectedIndex, correctIndex) {
+    const question = currentQuestions[currentQuestionIndex];
+    const isCorrect = selectedIndex === correctIndex;
+    
+    if (isCorrect) {
+        score++;
+        playSound('correct');
+    } else {
+        playSound('wrong');
+    }
+    
+    userAnswers[currentQuestionIndex] = selectedIndex;
+    showFeedback(isCorrect, question.explanation);
+    
+    // Disabilita tutti i pulsanti dopo la risposta
+    const buttons = document.querySelectorAll('#options button');
+    buttons.forEach(button => button.disabled = true);
+    
+    // Evidenzia la risposta corretta
+    buttons[correctIndex].classList.add('correct');
+    if (!isCorrect) {
+        buttons[selectedIndex].classList.add('wrong');
+    }
+    
+    // Abilita il pulsante Next dopo un breve ritardo
+    setTimeout(() => {
+        document.getElementById('next-button').disabled = false;
+    }, 1000);
 } 
