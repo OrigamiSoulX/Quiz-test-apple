@@ -522,4 +522,17 @@ body {
     #question-text {
         font-size: 1.2rem;
     }
+}
+
+#canvas-container {
+    margin: 20px auto;
+    text-align: center;
+}
+
+#figure-canvas {
+    border: 2px solid var(--primary-color);
+    border-radius: 8px;
+    background-color: var(--background-color);
+    max-width: 100%;
+    height: auto;
 } 

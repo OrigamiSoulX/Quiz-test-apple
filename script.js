@@ -115,32 +115,19 @@ const quizData = {
             }
         ]
     },
-    algebra: {
-        title: "Test di Logica e Ragionamento",
+    logic: {
+        title: "Logic Test Smart Mind",
         questions: [
             {
                 question: "Osserva la sequenza di figure e indica quale sarà la prossima:",
-                drawFunction: (ctx) => {
-                    // Disegna una sequenza di figure con punti crescenti
-                    const figures = [
+                drawFunction: () => {
+                    const sequence = [
                         { type: 'square', points: 1 },
                         { type: 'square', points: 2 },
                         { type: 'square', points: 4 },
                         { type: 'square', points: 7 }
                     ];
-                    
-                    figures.forEach((fig, i) => {
-                        const x = 50 + i * 70;
-                        const y = 150;
-                        drawSquare(ctx, x, y, 50);
-                        // Disegna i punti
-                        for (let j = 0; j < fig.points; j++) {
-                            const angle = (j * 2 * Math.PI) / fig.points;
-                            const px = x + Math.cos(angle) * 20;
-                            const py = y + Math.sin(angle) * 20;
-                            drawCircle(ctx, px, py, 5);
-                        }
-                    });
+                    animateSequence(sequence);
                 },
                 options: [
                     "13 punti",
@@ -186,27 +173,9 @@ const quizData = {
             },
             {
                 question: "Completa la sequenza di figure geometriche:",
-                drawFunction: (ctx) => {
-                    // Disegna una sequenza di figure geometriche
-                    const figures = ['triangle', 'square', 'pentagon', 'hexagon'];
-                    figures.forEach((fig, i) => {
-                        const x = 50 + i * 70;
-                        const y = 150;
-                        switch(fig) {
-                            case 'triangle':
-                                drawTriangle(ctx, x, y, 30);
-                                break;
-                            case 'square':
-                                drawSquare(ctx, x, y, 50);
-                                break;
-                            case 'pentagon':
-                                drawPolygon(ctx, x, y, 30, 5);
-                                break;
-                            case 'hexagon':
-                                drawPolygon(ctx, x, y, 30, 6);
-                                break;
-                        }
-                    });
+                drawFunction: () => {
+                    const sequence = ['triangle', 'square', 'pentagon', 'hexagon'];
+                    animateGeometricSequence(sequence);
                 },
                 options: [
                     "Triangolo",
@@ -218,15 +187,19 @@ const quizData = {
                 explanation: "La sequenza si ripete ogni 4 figure. 15 diviso 4 dà resto 3, quindi sarà la terza figura della sequenza: Pentagono."
             },
             {
-                question: "In una griglia 3x3, ci sono 3 cerchi e 3 quadrati disposti in modo che non ce ne siano 3 uguali in linea. Quante disposizioni diverse sono possibili?",
+                question: "In una griglia di simboli, ogni riga contiene 4 simboli tra stelle, lune e soli. Se in ogni riga la somma di stelle e lune deve essere pari e ci devono essere almeno 2 soli, quante combinazioni diverse sono possibili?",
+                drawFunction: () => {
+                    const symbols = ['star', 'moon', 'sun', 'star', 'moon', 'sun', 'star', 'moon', 'sun'];
+                    animateGrid(symbols, 3, 3);
+                },
                 options: [
-                    "12",
-                    "18",
-                    "24",
-                    "30"
+                    "6",
+                    "8",
+                    "10",
+                    "12"
                 ],
-                correct: 1,
-                explanation: "Per evitare tre figure uguali in linea, ci sono 18 disposizioni possibili considerando le rotazioni e i riflessi come configurazioni diverse."
+                correct: 2,
+                explanation: "Considerando le restrizioni (somma pari di stelle e lune, almeno 2 soli), ci sono 10 combinazioni possibili."
             },
             {
                 question: "Se in una sequenza ogni figura è composta da un numero di lati pari alla somma dei lati delle due figure precedenti, e le prime due figure sono un triangolo e un quadrato, quanti lati avrà la quinta figura della sequenza?",
