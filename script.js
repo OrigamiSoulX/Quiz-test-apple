@@ -1214,40 +1214,52 @@ function showNextQuestion() {
 
 // Show results function
 function showResults() {
-    const correctAnswers = userAnswers.filter((answer, index) => 
-        answer === questionOrder[index].correct
-    ).length;
-    const wrongAnswers = userAnswers.length - correctAnswers;
+    const quizContainer = document.getElementById('quiz-container');
+    const resultsContainer = document.getElementById('results');
+    const score = calculateScore();
+    const totalQuestions = getCurrentQuiz().questions.length;
+    const percentage = (score / totalQuestions) * 100;
 
-    correctCount.textContent = correctAnswers;
-    wrongCount.textContent = wrongAnswers;
+    quizContainer.style.display = 'none';
+    resultsContainer.style.display = 'block';
 
-    // Update answered questions set
-    questionOrder.forEach((_, index) => {
-        answeredQuestions.add(index);
-    });
+    let resultMessage = `
+        <h2>Risultati del Quiz</h2>
+        <p>Hai risposto correttamente a ${score} domande su ${totalQuestions}</p>
+        <p>Percentuale di successo: ${percentage.toFixed(1)}%</p>
+    `;
 
-    quizSummary.innerHTML = '';
-    userAnswers.forEach((answer, index) => {
-        const question = questionOrder[index];
-        const isCorrect = answer === question.correct;
-        const summaryItem = document.createElement('div');
-        summaryItem.className = `summary-item ${isCorrect ? 'correct' : 'wrong'}`;
-        summaryItem.innerHTML = `
-            <strong>Question ${index + 1}:</strong> ${question.question}<br>
-            <strong>Your answer:</strong> ${question.options[answer]}<br>
-            <strong>Correct answer:</strong> ${question.options[question.correct]}<br>
-            <strong>Explanation:</strong> ${question.explanation}
+    // Aggiungo il video tutorial per il quiz OOP
+    if (currentCategory === 'oop' && percentage >= 60) {
+        resultMessage += `
+            <div class="tutorial-section">
+                <h3>Complimenti! Vuoi approfondire le tue conoscenze?</h3>
+                <p>Guarda questo tutorial su UI/UX Design:</p>
+                <div class="video-container">
+                    <iframe 
+                        width="560" 
+                        height="315" 
+                        src="https://www.youtube.com/embed/6FzLp5j-Rl4?start=578" 
+                        title="Tutorial UI/UX Design" 
+                        frameborder="0" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                        allowfullscreen>
+                    </iframe>
+                </div>
+                <p class="tutorial-description">
+                    Questo video ti aiuterà a consolidare le tue conoscenze di UI/UX Design 
+                    e a comprendere meglio i concetti affrontati nel quiz.
+                </p>
+            </div>
         `;
-        quizSummary.appendChild(summaryItem);
-    });
+    }
 
-    quizScreen.classList.remove('active');
-    resultsScreen.classList.add('active');
+    resultMessage += `
+        <button onclick="restartQuiz()" class="btn">Riprova</button>
+        <button onclick="goToHome()" class="btn">Torna alla Home</button>
+    `;
 
-    // Update continue button text based on remaining batches
-    const remainingQuestions = TOTAL_QUESTIONS - answeredQuestions.size;
-    continueButton.textContent = remainingQuestions > 0 ? 'Continue to Next Batch' : 'Start New Quiz';
+    resultsContainer.innerHTML = resultMessage;
 }
 
 // End quiz function
