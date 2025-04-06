@@ -60,6 +60,10 @@ Un'applicazione web interattiva per quiz su vari argomenti, con un'interfaccia m
 
 ## 📦 Installazione
 
+### 🚀 Versione Online
+Il quiz è disponibile online all'indirizzo: [https://origamisoulx.github.io/Quiz-test-apple/](https://origamisoulx.github.io/Quiz-test-apple/)
+
+### 💻 Versione Locale
 1. Clona il repository:
 ```bash
 git clone https://github.com/OrigamiSoulX/Quiz-test-apple.git
