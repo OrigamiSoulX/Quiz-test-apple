@@ -1573,4 +1573,111 @@ function drawDomino(ctx, x, y, size, top, bottom) {
     positions[bottom].forEach(pos => {
         drawCircle(ctx, x + pos[0] * size/3, y + height/4 + pos[1] * size/3, dotSize);
     });
+}
+
+function animateSequence(sequence) {
+    const canvas = document.getElementById('questionCanvas');
+    const ctx = canvas.getContext('2d');
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    
+    sequence.forEach((item, index) => {
+        const x = 50 + (index * 100);
+        const y = 50;
+        
+        if (item.type === 'square') {
+            drawSquare(ctx, x, y, 30);
+            // Disegna i punti
+            for (let i = 0; i < item.points; i++) {
+                const pointX = x + (i % 3) * 10;
+                const pointY = y + Math.floor(i / 3) * 10;
+                drawCircle(ctx, pointX, pointY, 2);
+            }
+        }
+    });
+}
+
+function animateGeometricSequence(sequence) {
+    const canvas = document.getElementById('questionCanvas');
+    const ctx = canvas.getContext('2d');
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    
+    sequence.forEach((type, index) => {
+        const x = 50 + (index * 100);
+        const y = 50;
+        
+        switch(type) {
+            case 'triangle':
+                drawTriangle(ctx, x, y, 30);
+                break;
+            case 'square':
+                drawSquare(ctx, x, y, 30);
+                break;
+            case 'pentagon':
+                drawPolygon(ctx, x, y, 15, 5);
+                break;
+            case 'hexagon':
+                drawPolygon(ctx, x, y, 15, 6);
+                break;
+        }
+    });
+}
+
+function animateGrid(symbols, rows, cols) {
+    const canvas = document.getElementById('questionCanvas');
+    const ctx = canvas.getContext('2d');
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    
+    symbols.forEach((symbol, index) => {
+        const row = Math.floor(index / cols);
+        const col = index % cols;
+        const x = 50 + (col * 100);
+        const y = 50 + (row * 100);
+        
+        switch(symbol) {
+            case 'star':
+                drawStar(ctx, x, y, 20);
+                break;
+            case 'moon':
+                drawMoon(ctx, x, y, 20);
+                break;
+            case 'sun':
+                drawSun(ctx, x, y, 20);
+                break;
+        }
+    });
+}
+
+function drawStar(ctx, x, y, size) {
+    ctx.beginPath();
+    for (let i = 0; i < 5; i++) {
+        const angle = (i * 4 * Math.PI) / 5;
+        const radius = i % 2 === 0 ? size : size / 2;
+        const px = x + Math.sin(angle) * radius;
+        const py = y - Math.cos(angle) * radius;
+        if (i === 0) ctx.moveTo(px, py);
+        else ctx.lineTo(px, py);
+    }
+    ctx.closePath();
+    ctx.stroke();
+}
+
+function drawMoon(ctx, x, y, size) {
+    ctx.beginPath();
+    ctx.arc(x, y, size, 0.5 * Math.PI, 1.5 * Math.PI);
+    ctx.stroke();
+}
+
+function drawSun(ctx, x, y, size) {
+    ctx.beginPath();
+    ctx.arc(x, y, size, 0, 2 * Math.PI);
+    ctx.stroke();
+    
+    // Raggi del sole
+    for (let i = 0; i < 8; i++) {
+        const angle = (i * Math.PI) / 4;
+        ctx.beginPath();
+        ctx.moveTo(x + Math.sin(angle) * size, y - Math.cos(angle) * size);
+        ctx.lineTo(x + Math.sin(angle) * (size + 10), y - Math.cos(angle) * (size + 10));
+        ctx.stroke();
+    }
 } 
